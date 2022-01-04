@@ -1,7 +1,8 @@
 
 import styled from "styled-components";
 
-import Header from "./components/Header";
+import Header from "../components/Header";
+import Home from "../components/Home";
 
 
 function App() {
@@ -9,8 +10,7 @@ function App() {
 
   return (
     <Container className="App">
-      <Header />
-      
+      <Home/>
     </Container>
   );
 }

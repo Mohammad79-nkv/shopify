@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import UseAnimations from "react-useanimations";
 // import icon from "./12-layes-outline-edited.json";
-import user from "../icons/21-avatar-outline-edited.json";
-import basket from "../icons/139-basket-outline-edited (1).json";
-import search from "../icons/19-magnifier-zoom-search-outline-edited (1).json";
+import user from "../assets/icons/21-avatar-outline-edited.json";
+import basket from "../assets/icons/139-basket-outline-edited (1).json";
+import search from "../assets/icons/19-magnifier-zoom-search-outline-edited (1).json";
 import Lottie from "lottie-react-web";
 import { useState } from "react";
 
@@ -89,10 +89,10 @@ const Container = styled.header`
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 3px 5px;
+        padding: 0px 5px;
         border-radius: 50%;
         position: absolute;
-        right: -1px;
+        right: -10px;
         z-index: 999999;
       }
     }
