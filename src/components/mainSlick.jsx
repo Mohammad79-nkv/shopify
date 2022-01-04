@@ -42,19 +42,19 @@ const MainSlick = () => {
   return (
     <Container>
       <Content {...settings}>
-        <Wrap>
+        <Wrap className="slide-1">
             <img src="/images/c-d-x-PDX_a_82obo-unsplash.jpg"/>
         </Wrap>
-        <Wrap>
+        <Wrap className="slide-2">
             <img src="/images/charles-deluvio-1-nx1QR5dTE-unsplash.jpg"/>
         </Wrap>
-        <Wrap>
+        <Wrap className="slide-3">
             <img src="/images/giorgio-trovato-K62u25Jk6vo-unsplash.jpg"/>
         </Wrap>
-        <Wrap>
+        <Wrap className="slide-4">
             <img src="/images/imani-bahati-LxVxPA1LOVM-unsplash.jpg"/>
         </Wrap>
-        <Wrap>
+        <Wrap  className="slide-5">
             <img src="/images/rachit-tank-2cFZ_FB08UM-unsplash (4).jpg"/>
         </Wrap>
       </Content>
@@ -92,6 +92,21 @@ const Content = styled(Slider)`
     & > button::before {
       opacity: 1!important;
   }
+    }
+    .slide-1 {
+        background-color: #FEC900;
+    }
+    .slide-2 {
+        background-color: #FBF9F7;
+    }
+    .slide-3 {
+        background-color: #FAFAFA;
+    }
+    .slide-4 {
+        background-color: #F9FAFC;
+    }
+    .slide-5 {
+        background-color: #DBDBDB;
     }
 `;
 const Wrap = styled.div`

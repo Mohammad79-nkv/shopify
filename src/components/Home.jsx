@@ -1,3 +1,4 @@
+import BrandSlick from "./BrandSlick";
 import Header from "./Header";
 import MainSlick from "./mainSlick";
 
@@ -6,6 +7,7 @@ const Home = () => {
         <>
         <Header/>
         <MainSlick/>
+        <BrandSlick/>
         </>
      );
 }
