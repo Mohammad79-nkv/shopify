@@ -2,16 +2,18 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 const BrandSlick = () => {
-    const settings = {
-        // dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        speed: 5000,
-        autoplaySpeed: 2000,
-        cssEase: "linear"
-      };
+  const settings = {
+    // dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 5000,
+    autoplaySpeed: 0,
+    centerMode: true,
+    pauseOnHover: false,
+    cssEase: "linear",
+  };
   return (
     <Container>
       <Content {...settings}>
@@ -44,25 +46,33 @@ const Container = styled.div`
   width: 100%;
 `;
 const Content = styled(Slider)`
+  height: 100% !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   & > button {
     display: none !important;
   }
-  /* .slick-slide {
-      width: 300px !important;
-  } */
 `;
 const Wrap = styled.div`
-    
-  width: 200px!important;
+  width: 200px !important;
+  height: 100% !important;
   /* background-color: rgba(0, 0, 0, 0.5); */
-  z-index:99;
-  display:flex;
+  z-index: 99;
+  display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  border-radius: 10px !important;
   img {
-      z-index:9;
+    margin: 0 auto;
+    z-index: 9;
     width: 100px;
+    opacity: 0.5;
   }
+  
 `;
 
 export default BrandSlick;
