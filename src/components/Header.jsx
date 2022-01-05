@@ -6,6 +6,7 @@ import basket from "../assets/icons/139-basket-outline-edited (1).json";
 import search from "../assets/icons/19-magnifier-zoom-search-outline-edited (1).json";
 import Lottie from "lottie-react-web";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [userIcon, setUserIcon] = useState(false);
@@ -13,9 +14,11 @@ const Header = () => {
   const [searchIcon, setSearchIcon] = useState(false);
   return (
     <Container>
-      <Logo>
-        <img src="/images/shopify_logo_darkbg.svg" />
-      </Logo>
+      <Link to="/">
+        <Logo>
+          <img src="/images/shopify_logo_darkbg.svg" />
+        </Logo>
+      </Link>
       <Serach onMouseEnter={() => setSearchIcon(!searchIcon)}>
         <span>
           <Lottie
@@ -40,17 +43,22 @@ const Header = () => {
             }}
           />
         </div>
-        <div className="basket" onMouseEnter={() => setBasketIcon(!basketIcon)}>
-          <Lottie
-            direction={basketIcon ? 1 : -1}
-            options={{
-              animationData: basket,
-              loop: false,
-              autoplay: false,
-            }}
-          />
-          <span>0</span>
-        </div>
+        <Link to="cart">
+          <div
+            className="basket"
+            onMouseEnter={() => setBasketIcon(!basketIcon)}
+          >
+            <Lottie
+              direction={basketIcon ? 1 : -1}
+              options={{
+                animationData: basket,
+                loop: false,
+                autoplay: false,
+              }}
+            />
+            <span>0</span>
+          </div>
+        </Link>
       </div>
     </Container>
   );
@@ -80,12 +88,22 @@ const Container = styled.header`
       width: 48px;
       cursor: pointer;
     }
+    a {
+      text-decoration: none !important;
+      color: white !important;
+      /* padding: 0 !important; */
+      /* width: 60px; */
+      /* height: 60px; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .basket {
       padding-left: 10px;
-      border-left: 1px solid #EE537C;
+      border-left: 1px solid #ee537c;
       position: relative;
       span {
-        background-color: #EE537C;
+        background-color: #ee537c;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -119,7 +137,7 @@ const Serach = styled.div`
     outline: none;
     width: 100%;
     font-size: 20px;
-    color: #EE537C;
+    color: #ee537c;
   }
 `;
 export default Header;
