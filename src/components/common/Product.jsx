@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import addBasket from "../assets/icons/146-basket-trolley-shopping-card-outline-edited.json";
+import addBasket from "../../assets/icons/146-basket-trolley-shopping-card-outline-edited.json";
 // import { Rating } from '@material-ui/lab/Rating';
 import Rating from "@mui/material/Rating";
 import Lottie from "lottie-react-web";
@@ -8,8 +8,8 @@ import { useLocation } from "react-router";
 const Product = (props) => {
   const { title, price, description, image, rating, count } = props;
   const [addBasketIcon, setAddBasketIcon] = useState(false);
-  let location = useLocation();
-
+  let { pathname } = useLocation();
+  console.log(pathname);
   return (
     <Card>
       <CardImg>
@@ -23,13 +23,16 @@ const Product = (props) => {
         <div className="product-info">
           <div className="rating">
             <Rating name="read-only" value={rating} readOnly />
-            <span className="price">{count}</span>
+            <span className="price">({count})</span>
           </div>
         </div>
       </CardContent>
-      {!location === "/" && (
+      {pathname === "/" ? null : (
         <CardFooter>
-          <p>{price}$</p>
+          <Price>
+            <span>Price</span>
+            <p>{price}$</p>
+          </Price>
           <button onMouseEnter={() => setAddBasketIcon(!addBasketIcon)}>
             <div>
               <Lottie
@@ -54,15 +57,16 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: rgba(235, 146, 123, 0.5);
+  /* background: rgba(235, 146, 123, 0.5); */
+  border: 1px solid rgba(235, 146, 123, 0.9);
   color: #1d0d0c;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
   transition: all 0.2s ease-in-out !important;
   margin: 1rem;
   &:hover {
-    box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.3);
-    background-color: rgba(235, 146, 123, 1);
+    box-shadow: 0px 0px 12px -1px rgba(235, 146, 123, 0.7);
+    /* background-color: rgba(235, 146, 123, 0.2); */
   }
 `;
 const CardImg = styled.div`
@@ -115,21 +119,33 @@ const CardFooter = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(62, 81, 150, 0.9);
-    border: none;
+    background-color: #ffffff;
+    border: 2px solid #363671;
     padding: 0.5rem 1.5rem;
     border-radius: 10px;
-    color: #ffffff;
+    color: #363671;
     cursor: pointer;
     font-size: 13px;
     font-weight: 700;
     transition: all 0.2s ease-in-out;
+    font-size: 14px;
     div {
       width: 40px;
     }
     &:hover {
-      background-color: rgba(62, 81, 150, 1);
+      background-color: rgba(235, 146, 123, 0.2);
     }
+  }
+`;
+const Price = styled.div`
+  margin-left: 10px;
+  margin-bottom: -15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  span {
+    color:rgba(0, 0, 0, 0.6)
   }
 `;
 export default Product;
