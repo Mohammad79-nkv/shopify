@@ -6,7 +6,8 @@ import Product from "./Product";
 
 const Products = () => {
     const dispatch = useDispatch()
-    const products = useSelector(state => state.products)
+    const allProducts = useSelector(state => state.products)
+    const products = allProducts.slice(0, 5)
     useEffect(() => {
         dispatch(getProducts())
     },[] )
@@ -26,6 +27,8 @@ const Products = () => {
                   />
                 ))}
             </Content>
+            <Button>ALL PRODUCTS</Button>
+
         </Container>
      );
 }
@@ -38,6 +41,20 @@ const Content = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+`;
+const Button = styled.button`
+    display: block;
+    padding: 12px 80px;
+    background-color: rgba(238, 83, 124, 0.8);
+    color:white;
+    border:none;
+    margin:20px auto;
+    border-radius:10px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.3);
+    &:hover {
+        background-color: rgba(238, 83, 124, 1);
+    }
 `;
 
 export default Products;

@@ -4,9 +4,11 @@ import addBasket from "../assets/icons/146-basket-trolley-shopping-card-outline-
 import Rating from "@mui/material/Rating";
 import Lottie from "lottie-react-web";
 import { useState } from "react";
+import { useLocation } from "react-router";
 const Product = (props) => {
   const { title, price, description, image, rating, count } = props;
   const [addBasketIcon, setAddBasketIcon] = useState(false);
+  let location = useLocation();
 
   return (
     <Card>
@@ -25,22 +27,24 @@ const Product = (props) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter>
-        <p>{price}$</p>
-        <button onMouseEnter={() => setAddBasketIcon(!addBasketIcon)}>
-          <div>
-            <Lottie
-              direction={addBasketIcon ? 1 : -1}
-              options={{
-                animationData: addBasket,
-                loop: false,
-                autoplay: false,
-              }}
-            />
-          </div>
-          Add to Cart
-        </button>
-      </CardFooter>
+      {!location === "/" && (
+        <CardFooter>
+          <p>{price}$</p>
+          <button onMouseEnter={() => setAddBasketIcon(!addBasketIcon)}>
+            <div>
+              <Lottie
+                direction={addBasketIcon ? 1 : -1}
+                options={{
+                  animationData: addBasket,
+                  loop: false,
+                  autoplay: false,
+                }}
+              />
+            </div>
+            Add to Cart
+          </button>
+        </CardFooter>
+      )}
     </Card>
   );
 };
