@@ -59,15 +59,21 @@ const CartProduct = () => {
   );
 };
 const Container = styled.div`
-    border-bottom: 1px solid rgba(54, 54, 113, 0.3)
-
+  /* border-bottom: 1px solid rgba(54, 54, 113, 0.3); */
+  padding:10px;
 `;
 const Content = styled.div`
-background-color:rgba(235, 146, 123, 0.2);
+  /* background-color: rgba(235, 146, 123, 0.2); */
+  border-radius: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    box-shadow: 0px 0px 12px -1px rgba(54, 54, 113, 0.5);
+    /* border:1px solid rgba(54, 54, 113, 0.5); */
+  }
 `;
 const ProductImg = styled.div`
   img {
@@ -78,10 +84,10 @@ const ProductImg = styled.div`
   }
 `;
 const ProductInfo = styled.div`
-    color:#363671;
-    h5 {
-        font-weight: bold
-    }
+  color: #363671;
+  h5 {
+    font-weight: bold;
+  }
 `;
 const ProductCount = styled.div`
   display: flex;
@@ -96,6 +102,6 @@ const ProductCount = styled.div`
   }
 `;
 const DeleteProduct = styled.div`
-    width: 48px;
+  width: 48px;
 `;
 export default CartProduct;

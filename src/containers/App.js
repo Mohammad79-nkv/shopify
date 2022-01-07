@@ -16,15 +16,18 @@ function App() {
         <Route path="cart" element={<Cart/>}/>
         <Route path="products" element={<AllProducts />}/>
       </Routes>
-      <Footer />
+      {
+
+        <Footer />
+      }
 
     </Container>
   );
 }
 const Container = styled.div`
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: #ffffff; */
 `;
 export default App;

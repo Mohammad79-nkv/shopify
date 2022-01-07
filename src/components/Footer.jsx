@@ -1,6 +1,8 @@
+import { useLocation } from "react-router";
 import styled from "styled-components";
 
 const Footer = () => {
+  const { pathname } = useLocation();
   return (
     <Container className="container-fluid w-100 p-0">
       <Content className="container-fluid row p-4 w-100">
@@ -73,12 +75,13 @@ const Footer = () => {
           by Mohammad Nikvarz
         </h6>
       </Developer>
+      {pathname === "/cart" ? <EmptyContent></EmptyContent> : null}
     </Container>
   );
 };
 
 const Container = styled.footer`
-  background-color: #363671;
+  background-color: #35284a;
 `;
 const Content = styled.div`
   ul li {
@@ -121,17 +124,24 @@ const Content = styled.div`
 `;
 
 const Developer = styled.div`
-    border-top:1px solid rgba(255, 255, 255, 0.1);
-    padding:10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px;
   h6 {
-      color:rgba(255, 255, 255, 0.8)
+    color: rgba(255, 255, 255, 0.8);
   }
-  span:nth-child(1){
-      color:rgba(255, 0, 0, 0.8);
+  span:nth-child(1) {
+    color: rgba(255, 0, 0, 0.8);
   }
-  span:nth-child(2){
-      color:rgba(108, 76, 53, 0.8)
-;
+  span:nth-child(2) {
+    color: rgba(108, 76, 53, 0.8);
+  }
+`;
+const EmptyContent = styled.div`
+  display: none;
+  width: 100%;
+  height: 240px;
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
 
