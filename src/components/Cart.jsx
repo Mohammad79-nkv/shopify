@@ -52,6 +52,7 @@ const Container = styled.div`
 `;
 const Content = styled.div`
   height: 100% !important;
+  position: relative !important;
 `;
 const ProductCart = styled.div`
   height: 100% !important;
@@ -62,7 +63,7 @@ const ProductCart = styled.div`
   }
 `;
 const CartInfo = styled.div`
-  height: 100%;
+  height: 230px;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -70,7 +71,7 @@ const CartInfo = styled.div`
   align-items: center;
   @media (max-width: 768px) {
     position: fixed;
-    top:520px;
+    bottom: -5px;
     right: 0;
     width: 100%;
     z-index:999;

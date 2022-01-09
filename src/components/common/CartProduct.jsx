@@ -64,7 +64,7 @@ const Container = styled.div`
 `;
 const Content = styled.div`
   /* background-color: rgba(235, 146, 123, 0.2); */
-  border-radius: 20px;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;

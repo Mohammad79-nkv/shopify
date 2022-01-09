@@ -6,8 +6,14 @@ import { Routes, Route } from "react-router-dom";
 import Cart from "../components/Cart";
 import Footer from "../components/Footer";
 import AllProducts from "../components/AllProducts";
+import { useEffect } from "react";
+import {useLocation} from 'react-router-dom'
 
 function App() {
+  const {pathname} = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname])
   return (
     <Container className="App">
     <Header/>

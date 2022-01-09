@@ -9,7 +9,6 @@ const Product = (props) => {
   const { title, price, description, image, rating, count } = props;
   const [addBasketIcon, setAddBasketIcon] = useState(false);
   let { pathname } = useLocation();
-  console.log(pathname);
   return (
     <Card>
       <CardImg>
@@ -53,14 +52,14 @@ const Product = (props) => {
 };
 
 const Card = styled.div`
-  width: 313px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   /* background: rgba(235, 146, 123, 0.5); */
   border: 1px solid rgba(235, 146, 123, 0.9);
   color: #1d0d0c;
-  border-radius: 20px;
+  border-radius: 10px;
   /* border: 1px solid rgba(255, 255, 255, 0.18); */
   transition: all 0.2s ease-in-out !important;
   margin: 1rem;
@@ -121,7 +120,7 @@ const CardFooter = styled.div`
     justify-content: center;
     background-color: #ffffff;
     border: 2px solid #363671;
-    padding: 0.5rem 1.5rem;
+    padding: 0.1rem 0.5rem;
     border-radius: 10px;
     color: #363671;
     cursor: pointer;
