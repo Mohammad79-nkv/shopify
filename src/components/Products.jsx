@@ -7,8 +7,8 @@ import Product from "./common/Product";
 
 const Products = () => {
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.products.products);
-  const products = allProducts.slice(0, 5);
+  const products = useSelector((state) => state.products.products);
+  // if(allProducts) {const products = allProducts.slice(0, 5);}
   useEffect(() => {
     dispatch(getProducts());
   }, []);
@@ -16,7 +16,7 @@ const Products = () => {
     <Container>
       <Content className="container">
         {products &&
-          products.map((p) => (
+          products.slice(0, 5).map((p) => (
             <Product
               key={p.id}
               title={p.title}

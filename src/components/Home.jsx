@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <MainSlick />
       <BrandSlick />
-      <Products />
+      <Products/>
     </>
   );
 };
