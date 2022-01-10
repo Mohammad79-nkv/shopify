@@ -21,7 +21,6 @@ const AllProducts = () => {
   };
   const handleSort = (e) => {
     dispatch(sortProduct(e));
-    
   };
   const handleActive = (e) => {
     const btns = [...ref.current.children];
@@ -128,6 +127,7 @@ const AllProducts = () => {
           products.map((p) => (
             <Product
               key={p.id}
+              id = {p.id}
               title={p.title}
               price={parseInt(p.price)}
               description={p.description}

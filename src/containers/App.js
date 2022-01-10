@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import AllProducts from "../components/AllProducts";
 import { useEffect } from "react";
 import {useLocation} from 'react-router-dom'
+import SingleProduct from "../components/SingleProduct";
 
 function App() {
   const {pathname} = useLocation()
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="cart" element={<Cart/>}/>
         <Route path="products" element={<AllProducts />}/>
+        <Route path = "/products/p/:id" element={<SingleProduct/>}/>
       </Routes>
       {
 

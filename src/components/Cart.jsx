@@ -3,6 +3,7 @@ import CartProduct from "./common/CartProduct";
 import Footer from "./Footer";
 
 const Cart = () => {
+  
   return (
     <Container className="w-100 p-0">
       <Content className="row container-fluid w-100 p-0 m-0">

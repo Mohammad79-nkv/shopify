@@ -5,15 +5,29 @@ import Rating from "@mui/material/Rating";
 import Lottie from "lottie-react-web";
 import { useState } from "react";
 import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../reducers/cart";
+
 const Product = (props) => {
-  const { title, price, description, image, rating, count } = props;
+  const dispatch = useDispatch();
+  const { title, price, description, image, rating, count, id } = props;
   const [addBasketIcon, setAddBasketIcon] = useState(false);
   let { pathname } = useLocation();
+  // console.log(props)
+
+  const handleAddToCart = () => {
+    console.log("object");
+    dispatch(addToCart(id));
+  };
+
   return (
     <Card>
-      <CardImg>
-        <img src={image} />
-      </CardImg>
+      <Link to={`p/${id}`}>
+        <CardImg>
+          <img src={image} />
+        </CardImg>
+      </Link>
       <CardContent>
         <h2 className="product-title">{title}</h2>
         <p className="product-description">
@@ -32,7 +46,10 @@ const Product = (props) => {
             <span>Price</span>
             <p>{price}$</p>
           </Price>
-          <button onMouseEnter={() => setAddBasketIcon(!addBasketIcon)}>
+          <button
+            onMouseEnter={() => setAddBasketIcon(!addBasketIcon)}
+            onClick={handleAddToCart}
+          >
             <div>
               <Lottie
                 direction={addBasketIcon ? 1 : -1}
@@ -144,7 +161,7 @@ const Price = styled.div`
   justify-content: center;
   align-items: center;
   span {
-    color:rgba(0, 0, 0, 0.6)
+    color: rgba(0, 0, 0, 0.6);
   }
 `;
 export default Product;
