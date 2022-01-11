@@ -7,6 +7,8 @@ export const addToCart = (id) => {
   };
 };
 
+
+
 export const clearCart = () => {
     return async (dispatch) => {
         await dispatch({ type: "CLEAR_CART", payload:[]})

@@ -42,7 +42,12 @@ const Cart = () => {
           <ProductWrapper>
             {cartItems &&
               cartItems.map((p) => (
-                <CartProduct title={p.title} price={p.price} image={p.image} />
+                <CartProduct
+                  title={p.title}
+                  price={p.price}
+                  image={p.image}
+                  id={p.id}
+                />
               ))}
           </ProductWrapper>
         </ProductCart>
@@ -71,7 +76,9 @@ const Cart = () => {
               >
                 Clear Cart
               </button>
-              <button className="confirm" disabled={emptyCart}>Confirm</button>
+              <button className="confirm" disabled={emptyCart}>
+                Confirm
+              </button>
             </CartAction>
           </CartFooter>
         </CartInfo>
@@ -187,7 +194,7 @@ const CartAction = styled.div`
   button {
     padding: 10px 20px;
     border-radius: 10px;
-    &:disabled{
+    &:disabled {
       opacity: 0.5;
     }
   }
