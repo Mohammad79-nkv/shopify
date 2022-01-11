@@ -5,34 +5,16 @@ import plus from "../../assets/icons/49-plus-circle-outline-edited.json";
 import minus from "../../assets/icons/50-minus-circle-outline-edited.json";
 import trash from "../../assets/icons/185-trash-bin-outline-edited.json";
 import { handleCountAction } from "../../reducers/cart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartProduct = (props) => {
+  const dispatch = useDispatch();
   const { image, title, price, id } = props;
   const [increment, setIncrement] = useState(false);
   const [decrement, setDecrement] = useState(false);
   const [remove, setRemove] = useState(false);
   const allCartItems = useSelector(state => state.cart)
   const cartItemCount = allCartItems.find((i) => i.id === id).count;
-
-  const handleCountAction = (id, e) => {
-    console.log("hello")
-    console.log("2")
-    const cartItems = [...allCartItems]
-    const cartItem = cartItems.find((p) => p.id === id)
-    const countAction = e.currentTarget.dataset.count;
-    if (countAction === "increment"){
-        cartItem.count += 1;
-    }else if (countAction === "decrement"){
-        if ( cartItem.count > 1){
-            cartItem.count -= 1
-        }
-    }
-    // console.log(cartItem)
-    // return (dispatch, getState) => {
-    // }
-    console.log(allCartItems)
-}
 
   const handeCount = (e) => {
     const countAction = e.currentTarget.dataset.count;
@@ -42,7 +24,7 @@ const CartProduct = (props) => {
     } else if (countAction === "decrement") {
       setDecrement(!decrement);
     }
-    handleCountAction(id, e);
+    dispatch(handleCountAction(id, e));
   };
   return (
     <Container>

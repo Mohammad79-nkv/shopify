@@ -7,6 +7,31 @@ export const addToCart = (id) => {
   };
 };
 
+export const handleCountAction = (id, e) => {
+    console.log("hello")
+    console.log("2")
+    return async (dispatch, getState) => {
+        const countAction = e.currentTarget.dataset.count;
+    const allCartItems = [...getState().cart]
+    const cartItemIndx = allCartItems.findIndex((p) => p.id === id)
+    const cartItem = allCartItems[cartItemIndx]
+    if (countAction === "increment"){
+        cartItem.count += 1;
+    }else if (countAction === "decrement"){
+        if ( cartItem.count > 1){
+            cartItem.count -= 1
+        }
+    }
+    allCartItems[cartItemIndx] = cartItem
+    // console.log(cartItem)
+    // return (dispatch, getState) => {
+    // }
+    console.log(allCartItems)
+    await dispatch({ type: "CHANGE_NUMBER_CART", payload : allCartItems})
+}
+    
+}
+
 
 
 export const clearCart = () => {
@@ -22,6 +47,8 @@ const cartReducer = (state = [], action) => {
       return [...state, action.payload];
     case "CLEAR_CART":
         return action.payload
+    case "CHANGE_NUMBER_CART":
+        return [...action.payload]
     default:
       return state;
   }
