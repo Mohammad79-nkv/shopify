@@ -5,7 +5,8 @@ import plus from "../../assets/icons/49-plus-circle-outline-edited.json";
 import minus from "../../assets/icons/50-minus-circle-outline-edited.json";
 import trash from "../../assets/icons/185-trash-bin-outline-edited.json";
 
-const CartProduct = () => {
+const CartProduct = (props) => {
+  const {image, title , price} = props;
   const [increment, setIncrement] = useState(false);
   const [decrement, setDecrement] = useState(false);
   const [remove, setRemove] = useState(false);
@@ -13,11 +14,11 @@ const CartProduct = () => {
     <Container>
       <Content>
         <ProductImg>
-          <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" />
+          <img src={image} />
         </ProductImg>
         <ProductInfo>
-          <h5>title</h5>
-          <p>100 $</p>
+          <h5>{title.split(" ").slice(0,3).join(" ")}</h5>
+          <p>{price} $</p>
         </ProductInfo>
         <ProductCount>
           <div onClick={() => setIncrement(!increment)}>
@@ -55,6 +56,7 @@ const CartProduct = () => {
           </div>
         </DeleteProduct>
       </Content>
+      
     </Container>
   );
 };
@@ -104,4 +106,6 @@ const ProductCount = styled.div`
 const DeleteProduct = styled.div`
   width: 48px;
 `;
+
+
 export default CartProduct;

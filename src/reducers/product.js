@@ -1,26 +1,7 @@
-// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getAllProduct,
   getCategoryService,
 } from "./../services/productServices";
-
-// export const getProduct = createAsyncThunk("product/fetchAllProducts", async () => {
-//   const response = await getAllProduct();
-//   return response;
-// });
-
-// const productsSlice = createSlice({
-//   name: "products",
-//   initialState: [],
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder.addCase(getProduct.fulfilled, (state, action) => {
-//       state.entities.push(action.payload);
-//     });
-//   },
-// });
-
-// export default productsSlice;
 
 export const getProducts = () => {
   return async (dispatch) => {
@@ -99,11 +80,6 @@ const productsReducer = (state = {}, action) => {
         ...state,
         filteredProducts: action.payload,
       };
-    // case "SORT":
-    //   return {
-    //     ...state,
-    //     filteredProducts: action.payload,
-    //   };
     default:
       return state;
   }

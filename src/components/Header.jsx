@@ -5,13 +5,20 @@ import user from "../assets/icons/21-avatar-outline-edited.json";
 import basket from "../assets/icons/139-basket-outline-edited (1).json";
 import search from "../assets/icons/19-magnifier-zoom-search-outline-edited (1).json";
 import Lottie from "lottie-react-web";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [userIcon, setUserIcon] = useState(false);
   const [basketIcon, setBasketIcon] = useState(false);
   const [searchIcon, setSearchIcon] = useState(false);
+
+  const cart = useSelector(state => state.cart)
+
+  useEffect(() => {
+    setBasketIcon(!basketIcon)
+  } , [cart])
   return (
     <Container>
       <Link to="/">
@@ -56,7 +63,7 @@ const Header = () => {
                 autoplay: false,
               }}
             />
-            <span>0</span>
+            <span>{cart.length}</span>
           </div>
         </Link>
       </div>

@@ -1,9 +1,23 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { clearCart } from "../reducers/cart";
 import CartProduct from "./common/CartProduct";
 import Footer from "./Footer";
 
 const Cart = () => {
-  
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
+
+  const emptyCart = cartItems.length === 0;
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+    setShowModal(!showModal);
+  };
+
   return (
     <Container className="w-100 p-0">
       <Content className="row container-fluid w-100 p-0 m-0">
@@ -11,11 +25,25 @@ const Cart = () => {
           <div className="cart-header w-100 d-flex justify-content-center align-items-center  ">
             <h1>YOUR CART</h1>
           </div>
+          {emptyCart && (
+            <div className="p-2">
+              <div className="bg-dark bg-opacity-25 w-100 rounded-3 p-3">
+                <div className="bg-white d-flex flex-column align-items-center p-2">
+                  <h4>Your Cart is empty</h4>
+                  <Link to="/products">
+                    <button className="btn bg-danger bg-opacity-75 text-white mt-3">
+                      ALL PRODUCTS
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
           <ProductWrapper>
-            <CartProduct />
-            <CartProduct />
-            <CartProduct />
-            <CartProduct />
+            {cartItems &&
+              cartItems.map((p) => (
+                <CartProduct title={p.title} price={p.price} image={p.image} />
+              ))}
           </ProductWrapper>
         </ProductCart>
         <CartInfo className="col-12 col-md-4">
@@ -36,12 +64,42 @@ const Cart = () => {
               <span>0 $</span>
             </TotalPrice>
             <CartAction className="d-flex justify-content-center w-100 mt-4">
-              <button className="clear ">Clear Cart</button>
-              <button className="confirm">Confirm</button>
+              <button
+                className="clear"
+                onClick={() => setShowModal(!showModal)}
+                disabled={emptyCart}
+              >
+                Clear Cart
+              </button>
+              <button className="confirm" disabled={emptyCart}>Confirm</button>
             </CartAction>
           </CartFooter>
         </CartInfo>
       </Content>
+      {showModal && (
+        <div className="d-flex w-100 h-100 justify-content-center align-items-center position-fixed top-0 bottom-0 bg-dark bg-opacity-50">
+          <div className="w-auto h-auto bg-white rounded-3">
+            <h5 className="pt-4 pb-3 d-flex justify-content-center align-items-center px-3">
+              Are you sure to remove{" "}
+              <span className="font-weight-bolder text-danger mx-1">
+                {cartItems.length}
+              </span>{" "}
+              {`${cartItems.length > 1 ? "item`s" : "item"}`}{" "}
+            </h5>
+            <div className="py-3 d-flex justify-content-between align-items-center px-5">
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => setShowModal(!showModal)}
+              >
+                Cancel
+              </button>
+              <button className="btn btn-danger" onClick={handleClearCart}>
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </Container>
   );
 };
@@ -75,13 +133,15 @@ const CartInfo = styled.div`
     bottom: -5px;
     right: 0;
     width: 100%;
-    z-index:999;
+    z-index: 999;
     background-color: white;
     box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.3);
-    border-radius:10px;
+    border-radius: 10px;
   }
 `;
-const ProductWrapper = styled.div``;
+const ProductWrapper = styled.div`
+  min-height: 100vh;
+`;
 const CartFooter = styled.div`
   @media (max-width: 768px) {
     width: 100%;
@@ -119,7 +179,7 @@ const UserInfo = styled.div`
   @media (max-width: 768px) {
     display: flex;
     width: 100%;
-    justify-content:space-between;
+    justify-content: space-between;
     /* padding-right: 200px; */
   }
 `;
@@ -127,6 +187,9 @@ const CartAction = styled.div`
   button {
     padding: 10px 20px;
     border-radius: 10px;
+    &:disabled{
+      opacity: 0.5;
+    }
   }
   .clear {
     margin-right: 20px;
@@ -148,5 +211,16 @@ const CartAction = styled.div`
       background-color: rgba(238, 83, 124, 0.8);
     }
   }
+`;
+const Modal = styled.div`
+  /* position: fixed; */
+  /* width: 100vw; */
+  /* height: 100vh; */
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  /* top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; */
+  /* z-index: 1000; */
 `;
 export default Cart;

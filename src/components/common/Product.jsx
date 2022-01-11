@@ -3,10 +3,10 @@ import addBasket from "../../assets/icons/146-basket-trolley-shopping-card-outli
 // import { Rating } from '@material-ui/lab/Rating';
 import Rating from "@mui/material/Rating";
 import Lottie from "lottie-react-web";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../reducers/cart";
 
 const Product = (props) => {
@@ -14,7 +14,8 @@ const Product = (props) => {
   const { title, price, description, image, rating, count, id } = props;
   const [addBasketIcon, setAddBasketIcon] = useState(false);
   let { pathname } = useLocation();
-  // console.log(props)
+  const cart = useSelector((state) => state.cart);
+  let isExistInCart = cart.find((p) => p.id === id);
 
   const handleAddToCart = () => {
     console.log("object");
@@ -49,18 +50,28 @@ const Product = (props) => {
           <button
             onMouseEnter={() => setAddBasketIcon(!addBasketIcon)}
             onClick={handleAddToCart}
+            disabled={isExistInCart}
           >
-            <div>
-              <Lottie
-                direction={addBasketIcon ? 1 : -1}
-                options={{
-                  animationData: addBasket,
-                  loop: false,
-                  autoplay: false,
-                }}
-              />
-            </div>
-            Add to Cart
+            {isExistInCart ? (
+              <Fragment>
+              <i class="bi bi-check-lg"></i>
+              <span>In cart</span>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <div>
+                  <Lottie
+                    direction={addBasketIcon ? 1 : -1}
+                    options={{
+                      animationData: addBasket,
+                      loop: false,
+                      autoplay: false,
+                    }}
+                  />
+                </div>
+                <span>Add to Cart</span>
+              </Fragment>
+            )}
           </button>
         </CardFooter>
       )}
@@ -150,6 +161,13 @@ const CardFooter = styled.div`
     }
     &:hover {
       background-color: rgba(235, 146, 123, 0.2);
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+    i {
+      width: 48px;
+      font-size: 25px;
     }
   }
 `;
