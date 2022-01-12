@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 import AllProducts from "../components/AllProducts";
 import { useEffect } from "react";
 import {useLocation} from 'react-router-dom'
-import SingleProduct from "../components/SingleProduct";
+import SingleProduct from './../components/common/SingleProduct';
 
 function App() {
   const {pathname} = useLocation()
