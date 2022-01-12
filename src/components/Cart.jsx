@@ -18,6 +18,11 @@ const Cart = () => {
     setShowModal(!showModal);
   };
 
+  const handleTotalPrice = () => {
+    return cartItems.reduce((acc, item) => acc + item.price * item.count, 0).toFixed(2);
+  };
+  
+
   return (
     <Container className="w-100 p-0">
       <Content className="row container-fluid w-100 p-0 m-0">
@@ -66,7 +71,7 @@ const Cart = () => {
           <CartFooter>
             <TotalPrice className="my-4">
               <h5>Total Price:</h5>
-              <span>0 $</span>
+              <span>{handleTotalPrice().toString()} $</span>
             </TotalPrice>
             <CartAction className="d-flex justify-content-center w-100 mt-4">
               <button
@@ -114,6 +119,7 @@ const Cart = () => {
 const Container = styled.div`
   margin-top: 80px;
   position: relative;
+  min-height: calc(100vh - 80px);
   // height: calc(100vh) !important;
 `;
 const Content = styled.div`
@@ -147,7 +153,7 @@ const CartInfo = styled.div`
   }
 `;
 const ProductWrapper = styled.div`
-  min-height: 100vh;
+  /* min-height: 100vh; */
 `;
 const CartFooter = styled.div`
   @media (max-width: 768px) {

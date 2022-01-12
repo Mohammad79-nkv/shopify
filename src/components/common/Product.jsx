@@ -8,8 +8,10 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../reducers/cart";
+import ProductPerLoader from "../preLoader/ProductPerLoader";
 
 const Product = (props) => {
+  const productLoader = useSelector((state) => state.productLoader);
   const dispatch = useDispatch();
   const { title, price, description, image, rating, count, id } = props;
   const [addBasketIcon, setAddBasketIcon] = useState(false);
@@ -21,7 +23,7 @@ const Product = (props) => {
     console.log("object");
     dispatch(addToCart(id));
   };
-
+  console.log(productLoader);
   return (
     <Card>
       <Link to={`p/${id}`}>
@@ -76,7 +78,7 @@ const Product = (props) => {
         </CardFooter>
       )}
     </Card>
-  );
+  )
 };
 
 const Card = styled.div`

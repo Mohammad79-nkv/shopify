@@ -2,10 +2,12 @@ import {
   getAllProduct,
   getCategoryService,
 } from "./../services/productServices";
+import { setLoading } from "./productLoaded";
 
 export const getProducts = () => {
   return async (dispatch) => {
     const { data } = await getAllProduct();
+    await dispatch(setLoading())
     await dispatch({ type: "INIT_PRODUCTS", payload: data });
   };
 };

@@ -18,7 +18,7 @@ const Header = () => {
 
   useEffect(() => {
     setBasketIcon(!basketIcon)
-  } , [cart])
+  } , [cart.length])
   return (
     <Container>
       <Link to="/">

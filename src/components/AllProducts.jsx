@@ -1,14 +1,23 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import { getCategories, getProducts, handleDelete, sortProduct } from "../reducers/product";
+import {
+  getCategories,
+  getProducts,
+  handleDelete,
+  sortProduct,
+} from "../reducers/product";
 import Product from "./common/Product";
 import { filterProducts } from "./../reducers/product";
+import FilterPreLoader from "./preLoader/FilterPreLoader";
+import ProductWrapper from "./wrapper/ProductWrapper";
+import PreLoaderWrapper from "./preLoader/PreLoaderWrapper";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.filteredProducts);
   const categories = useSelector((state) => state.products.categories);
+  const productLoader = useSelector((state) => state.productLoader);
   const ref = useRef();
   //   const products = allProducts.slice(0, 5);
   useEffect(() => {
@@ -54,9 +63,7 @@ const AllProducts = () => {
                 <i class="bi bi-sort-down mx-1"></i>Price (High to Low)
               </a>
             </li>
-            <li
-              
-            >
+            <li>
               <a
                 href="#"
                 class="dropdown-item"
@@ -78,21 +85,27 @@ const AllProducts = () => {
             </li>
           </ul>
         </div>
-        <div
-          ref={ref}
-          className="btn-groupp d-flex w-100 justify-content-center d-none d-lg-flex"
-        >
-          {categories &&
-            categories.map((categorie) => (
-              <button
-                onClick={(e) => handleActive(e)}
-                type="button"
-                class="btn btn-outline-success mx-1"
-                data-filter={categorie === "all" ? "" : categorie}
-              >
-                {categorie.toUpperCase()}
-              </button>
-            ))}
+        <div className="d-none d-lg-flex">
+          {productLoader ? (
+            <div
+              ref={ref}
+              className="btn-groupp d-flex w-100 justify-content-center d-none d-lg-flex"
+            >
+              {categories &&
+                categories.map((categorie) => (
+                  <button
+                    onClick={(e) => handleActive(e)}
+                    type="button"
+                    class="btn btn-outline-success mx-1"
+                    data-filter={categorie === "all" ? "" : categorie}
+                  >
+                    {categorie.toUpperCase()}
+                  </button>
+                ))}
+            </div>
+          ) : (
+            <FilterPreLoader />
+          )}
         </div>
         {categories && (
           <div class="dropdown d-lg-none">
@@ -123,19 +136,7 @@ const AllProducts = () => {
         )}
       </ManageProducts>
       <Content className="container d-flex flex-wrap justify-content-center">
-        {products &&
-          products.map((p) => (
-            <Product
-              key={p.id}
-              id = {p.id}
-              title={p.title}
-              price={parseInt(p.price)}
-              description={p.description}
-              image={p.image}
-              rating={p.rating.rate}
-              count={p.rating.count}
-            />
-          ))}
+        {productLoader && products ? <ProductWrapper /> : <PreLoaderWrapper />}
       </Content>
     </Container>
   );

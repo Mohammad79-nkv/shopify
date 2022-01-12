@@ -6,6 +6,7 @@ import minus from "../../assets/icons/50-minus-circle-outline-edited.json";
 import trash from "../../assets/icons/185-trash-bin-outline-edited.json";
 import { handleCountAction } from "../../reducers/cart";
 import { useDispatch, useSelector } from "react-redux";
+import { handleDeleteItem } from './../../reducers/cart';
 
 const CartProduct = (props) => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const CartProduct = (props) => {
   const allCartItems = useSelector(state => state.cart)
   const cartItemCount = allCartItems.find((i) => i.id === id).count;
 
-  const handeCount = (e) => {
+  const handleCount = (e) => {
     const countAction = e.currentTarget.dataset.count;
     console.log(countAction);
     if (countAction === "increment") {
@@ -26,6 +27,12 @@ const CartProduct = (props) => {
     }
     dispatch(handleCountAction(id, e));
   };
+
+  const handleRemoveItem = () => {
+    setRemove(!remove)
+    dispatch(handleDeleteItem(id))
+  }
+
   return (
     <Container>
       <Content>
@@ -37,7 +44,7 @@ const CartProduct = (props) => {
           <p>{price} $</p>
         </ProductInfo>
         <ProductCount>
-          <div data-count="increment" onClick={(e) => handeCount(e)}>
+          <div data-count="increment" onClick={(e) => handleCount(e)}>
             <Lottie
               direction={increment ? 1 : -1}
               options={{
@@ -51,7 +58,7 @@ const CartProduct = (props) => {
           <div
             data-count="decrement"
             className="a"
-            onClick={(e) => handeCount(e)}
+            onClick={(e) => handleCount(e)}
           >
             <div>
               <Lottie
@@ -66,7 +73,7 @@ const CartProduct = (props) => {
           </div>
         </ProductCount>
         <DeleteProduct>
-          <div onClick={() => setRemove(!remove)}>
+          <div onClick={handleRemoveItem}>
             <Lottie
               direction={remove ? 1 : -1}
               options={{
