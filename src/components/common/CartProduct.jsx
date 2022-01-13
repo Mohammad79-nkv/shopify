@@ -40,7 +40,7 @@ const CartProduct = (props) => {
           <img src={image} />
         </ProductImg>
         <ProductInfo>
-          <h5>{title.split(" ").slice(0, 3).join(" ")}</h5>
+          <h5>{title}</h5>
           <p>{price} $</p>
         </ProductInfo>
         <ProductCount>
