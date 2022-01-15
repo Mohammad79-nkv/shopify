@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../reducers/cart";
 import ProductPerLoader from "../preLoader/ProductPerLoader";
+import { toast } from "react-toastify";
 
 const Product = (props) => {
   const productLoader = useSelector((state) => state.productLoader);
@@ -21,9 +22,17 @@ const Product = (props) => {
 
   const handleAddToCart = () => {
     console.log("object");
+    toast.success(`${title} added to cart`, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
     dispatch(addToCart(id));
   };
-  console.log(productLoader);
   return (
     <Card>
       <Link to={`p/${id}`}>

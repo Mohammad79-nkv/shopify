@@ -6,6 +6,7 @@ import { getSingleProduct } from "../../reducers/singleProduct";
 import Rating from "@mui/material/Rating";
 import { addToCart } from "../../reducers/cart";
 import Recommend from "../Recommend";
+import { toast } from "react-toastify";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -26,6 +27,15 @@ const SingleProduct = () => {
 
   const handleAddToCart = (id) => {
     console.log("object");
+    toast.success(<p><span style={{fontWeight: "bold"}}>{product.title}</span> added to cart</p>, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
     dispatch(addToCart(id));
   };
 

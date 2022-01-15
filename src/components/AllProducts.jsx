@@ -12,8 +12,12 @@ import { filterProducts } from "./../reducers/product";
 import FilterPreLoader from "./preLoader/FilterPreLoader";
 import ProductWrapper from "./wrapper/ProductWrapper";
 import PreLoaderWrapper from "./preLoader/PreLoaderWrapper";
+import { useState } from "react";
 
 const AllProducts = () => {
+  const [sortTitle, setSortTitle] = useState("");
+  const [categoryTitle, setCategoryTitle] = useState("");
+
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.filteredProducts);
   const categories = useSelector((state) => state.products.categories);
@@ -26,9 +30,11 @@ const AllProducts = () => {
   }, []);
 
   const handleFilter = (e) => {
+    setCategoryTitle(e.target.innerText);
     dispatch(filterProducts(e));
   };
   const handleSort = (e) => {
+    setSortTitle(e.target.innerText);
     dispatch(sortProduct(e));
   };
   const handleActive = (e) => {
@@ -40,10 +46,10 @@ const AllProducts = () => {
 
   return (
     <Container>
-      <ManageProducts className="d-flex p-5 justify-content-around mx-lg-5 ">
-        <div class="dropdown  ">
+      <ManageProducts className="d-flex p-5 justify-content-around justify-content-lg-center mx-lg-5 ">
+        <div class="dropdown  me-lg-5">
           <button
-            class="btn btn-outline-dark dropdown-toggle"
+            class="btn btn-outline-dark dropdown-toggle me-lg-5"
             type="button"
             id="dropdownMenuButton1"
             data-bs-toggle="dropdown"
@@ -60,7 +66,8 @@ const AllProducts = () => {
                 data-sortItem="p-Descending"
                 onClick={(e) => handleSort(e)}
               >
-                <i class="bi bi-sort-down mx-1"></i>Price (High to Low)
+                <i class="bi bi-sort-down mx-1"></i>
+                <span>Price (High to Low)</span>
               </a>
             </li>
             <li>
@@ -135,6 +142,22 @@ const AllProducts = () => {
           </div>
         )}
       </ManageProducts>
+      <SortFilterInfo className="w-100 d-flex justify-content-center">
+        <div className=" w-50 d-flex justify-content-between">
+          {sortTitle !== "" && (
+            <div>
+              <span className="text-muted">Sort By : </span>
+              <span>{sortTitle}</span>
+            </div>
+          )}
+          {categoryTitle !== "" && (
+            <div>
+              <span className="text-muted">Category : </span>
+              <span>{categoryTitle}</span>
+            </div>
+          )}
+        </div>
+      </SortFilterInfo>
       <Content className="container d-flex flex-wrap justify-content-center">
         {productLoader && products ? <ProductWrapper /> : <PreLoaderWrapper />}
       </Content>
@@ -149,6 +172,10 @@ const Content = styled.div`
 const Container = styled.div`
   min-height: calc(100vh + 80px);
   margin-top: 80px;
+`;
+const SortFilterInfo = styled.div`
+  div {
+  }
 `;
 
 export default AllProducts;

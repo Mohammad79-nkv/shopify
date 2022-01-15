@@ -114,6 +114,7 @@ const ProductImg = styled.div`
   }
 `;
 const ProductInfo = styled.div`
+  width: 50%;
   color: #363671;
   h5 {
     font-weight: bold;
