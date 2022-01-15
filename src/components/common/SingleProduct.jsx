@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { getSingleProduct } from "../../reducers/singleProduct";
 import Rating from "@mui/material/Rating";
 import { addToCart } from "../../reducers/cart";
+import Recommend from "../Recommend";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -60,9 +61,9 @@ const SingleProduct = () => {
               {product.title}
             </ProductTitle>
             <RatingDiv className="pb-4">
-              <div className="d-flex pt-2">
-                <i class="bi bi-emoji-smile mx-1"></i>
-                <p className="text-muted ">
+              <div className="d-flex justify-content-center align-items-center pt-2 mb-2">
+                <i class="bi bi-check-circle-fill me-1 text-primary"></i>{" "}
+                <p className="text-muted m-0">
                   {satisfactionPercentage.toFixed()}% ({rate.count} people) of
                   buyers have offered this product
                 </p>
@@ -86,7 +87,7 @@ const SingleProduct = () => {
               <div className="delivery d-flex flex-column p-3 ">
                 <p>Available in Shopify warehouse</p>
                 <div>
-                  <i class="bi bi-truck me-2"></i>
+                  <i class="bi bi-truck me-2 red"></i>
                   <small>Delivery</small>
                 </div>
               </div>
@@ -112,6 +113,7 @@ const SingleProduct = () => {
               </AddCart>
             </ProductAction>
           </div>
+          <Recommend category={product.category} />
         </Content>
       </Container>
     )
@@ -156,7 +158,11 @@ const ProductType = styled.div``;
 const ProductTitle = styled.h5`
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `;
-const RatingDiv = styled.div``;
+const RatingDiv = styled.div`
+  i {
+    font-size: 20px;
+  }
+`;
 const Description = styled.div``;
 const ProductAction = styled.div`
   background-color: rgba(62, 81, 150, 0.05);
@@ -173,7 +179,8 @@ const ProductAction = styled.div`
   .guarantee {
     font-size: 12px;
     i {
-      font-size: 18px;
+      font-size: 20px;
+      color: green;
     }
   }
   .delivery {

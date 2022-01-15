@@ -9,9 +9,9 @@ const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   // if(allProducts) {const products = allProducts.slice(0, 5);}
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getProducts());
+  // }, []);
   return (
     <Container>
       <Content className="container">

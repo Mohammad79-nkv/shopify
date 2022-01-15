@@ -10,6 +10,10 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { BrowserRouter } from "react-router-dom";
+import { getProducts } from './reducers/product';
+
+  store.dispatch(getProducts())
+
 
 ReactDOM.render(
   <Provider store={store}>
