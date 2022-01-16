@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
+import search from "../assets/icons/19-magnifier-zoom-search-outline-edited (1).json";
 import {
   getCategories,
   getProducts,
@@ -8,6 +9,7 @@ import {
   sortProduct,
 } from "../reducers/product";
 import Product from "./common/Product";
+import Lottie from "lottie-react-web";
 import { filterProducts } from "./../reducers/product";
 import FilterPreLoader from "./preLoader/FilterPreLoader";
 import ProductWrapper from "./wrapper/ProductWrapper";
@@ -22,7 +24,9 @@ const AllProducts = () => {
   const products = useSelector((state) => state.products.filteredProducts);
   const categories = useSelector((state) => state.products.categories);
   const productLoader = useSelector((state) => state.productLoader);
+  const [searchIcon, setSearchIcon] = useState(false);
   const ref = useRef();
+  // const history = useHistory();
   //   const products = allProducts.slice(0, 5);
   useEffect(() => {
     dispatch(getProducts());
@@ -44,8 +48,27 @@ const AllProducts = () => {
     handleFilter(e);
   };
 
+  // const handleSearch = () => {
+  //   <Redirect/>
+  // }
   return (
     <Container>
+      <Serach className="mb-5" onMouseEnter={() => setSearchIcon(!searchIcon)}>
+          <span>
+            <Lottie
+              direction={searchIcon ? 1 : -1}
+              options={{
+                animationData: search,
+                loop: false,
+                autoplay: false,
+              }}
+            />
+          </span>
+          <input
+            placeholder="Inter your product title ..."
+            
+          />
+      </Serach>
       <ManageProducts className="d-flex p-5 justify-content-around justify-content-lg-center mx-lg-5 ">
         <div class="dropdown  me-lg-5">
           <button
@@ -164,17 +187,39 @@ const AllProducts = () => {
     </Container>
   );
 };
-const ManageProducts = styled.div``;
+const ManageProducts = styled.div`
+  border-top: 1px solid rgba(0, 0, 0, 0.7);
+`;
 const Content = styled.div`
   width: 100%;
   margin-top: 80px;
 `;
 const Container = styled.div`
   min-height: calc(100vh + 80px);
-  margin-top: 80px;
+  margin-top: 180px;
 `;
 const SortFilterInfo = styled.div`
   div {
+  }
+`;
+
+const Serach = styled.div`
+  margin: 0px auto;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 50%;
+  padding: 5px;
+  border-radius: 10px;
+  span {
+    width: 48px;
+  }
+  input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 20px;
+    color: #ee537c;
   }
 `;
 
