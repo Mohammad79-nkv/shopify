@@ -12,6 +12,7 @@ import SingleProduct from "./../components/common/SingleProduct";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SignIn from "../components/register/SignIn";
+import SignUp from "../components/register/SignUp";
 
 function App() {
   const { pathname } = useLocation();
@@ -28,6 +29,7 @@ function App() {
         <Route path="/products" element={<AllProducts />} />
         <Route path="/products/p/:id" element={<SingleProduct />} />
         <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signUp" element={<SignUp />} />
       </Routes>
 
       <Footer />
