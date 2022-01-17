@@ -1,24 +1,34 @@
 import styled from "styled-components";
 import UseAnimations from "react-useanimations";
 // import icon from "./12-layes-outline-edited.json";
-import user from "../assets/icons/21-avatar-outline-edited.json";
+import userImg from "../assets/icons/21-avatar-outline-edited.json";
 import basket from "../assets/icons/139-basket-outline-edited (1).json";
 import search from "../assets/icons/19-magnifier-zoom-search-outline-edited (1).json";
 import Lottie from "lottie-react-web";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../reducers/user";
 
 const Header = () => {
   const [userIcon, setUserIcon] = useState(false);
   const [basketIcon, setBasketIcon] = useState(false);
   const [searchIcon, setSearchIcon] = useState(false);
+  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     setBasketIcon(!basketIcon);
+    console.log(user);
   }, [cart.length]);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("user")
+    dispatch(logOut())
+  }
+
   return (
     <Container className="p-4">
       <Link to="/">
@@ -42,25 +52,53 @@ const Header = () => {
         // </Serach>
       }
       <div>
-        {
-          // <div onMouseEnter={() => setUserIcon(!userIcon)}>
-          //     <Lottie
-          //       direction={userIcon ? 1 : -1}
-          //       options={{
-          //         animationData: user,
-          //         loop: false,
-          //         autoplay: false,
-          //       }}
-          //     />
-          //   </div>
-        }
-        <SignIn className="">
-          <Link to="/signin" className="w-100">
-            <span className="w-100 d-flex justify-content-center align-items-center">
-              <h6 className="m-0">Sign In</h6>
-            </span>
-          </Link>
-        </SignIn>
+        {user.fullname ? (
+          <Fragment>
+            <div className=" userIcon w-100">
+              <div
+                className="userIcon"
+                onMouseEnter={() => setUserIcon(!userIcon)}
+              >
+                <Lottie
+                  direction={userIcon ? 1 : -1}
+                  options={{
+                    animationData: userImg,
+                    loop: false,
+                    autoplay: false,
+                  }}
+                />
+              </div>
+              <div className="UserInfo d-flex flex-column rounded-3">
+                <div className="userDetail d-flex align-items-center justify-content-start w-100 mb-2">
+                  <i class="bi bi-person-circle mx-1 w-25  font"></i>
+                  <div className="d-flex flex-column w-100">
+                    <h5 className="m-0 p-0 text-capitalize text">
+                      {user.fullname}
+                    </h5>
+                    <small className="m-0 p-0 text-wrap text-muted">
+                      {user.email}
+                    </small>
+                  </div>
+                </div>
+                <div className="logOut w-100">
+                  <button className="btn my-2 ms-3" onClick={handleLogOut}>
+                      <i class="bi bi-box-arrow-right text-reset"></i>
+                    Log out
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Fragment>
+        ) : (
+          <SignIn className="">
+            <Link to="/signin" className="w-100">
+              <span className="w-100 d-flex justify-content-center align-items-center">
+                <h6 className="m-0">Sign In</h6>
+              </span>
+            </Link>
+          </SignIn>
+        )}
+
         <Link to="cart">
           <div
             className="basket"
@@ -130,6 +168,41 @@ const Container = styled.header`
         position: absolute;
         right: -10px;
         z-index: 999999;
+      }
+    }
+  }
+  .userIcon {
+    position: relative;
+    .UserInfo {
+      display: none!important;
+      position: absolute;
+      top: 45px;
+      /* right:10px; */
+      left: -110px;
+      width: auto;
+      background-color: #3e5196;
+      transition: all 0.2s ease-in-out;
+      .userDetail {
+        i:nth-child(1) {
+          font-size: 40px;
+          color: rgba(238, 83, 124, 0.9);
+          /* border-radius: 20px; */
+        }
+      }
+      .logOut {
+        border-top: 1px solid rgba(238, 83, 124, 0.8);
+        button {
+          color: white;
+          background-color: rgba(238, 83, 124, 0.2);
+          &:hover {
+            background-color: rgba(238, 83, 124, 0.8);
+          }
+        }
+      }
+    }
+    &:hover {
+      .UserInfo {
+        display:flex!important;
       }
     }
   }

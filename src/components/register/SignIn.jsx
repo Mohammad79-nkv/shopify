@@ -41,6 +41,7 @@ const SignIn = () => {
       console.log(status);
       const userLogedIn = jwt(data.token).user
       dispatch(setUser(userLogedIn))
+      localStorage.setItem("user", JSON.stringify(userLogedIn))
       navigate("/", {replace : true})
 
     }catch(err) {}

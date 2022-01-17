@@ -13,12 +13,21 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SignIn from "../components/register/SignIn";
 import SignUp from "../components/register/SignUp";
+import { useDispatch } from "react-redux";
+import { setUser } from "../reducers/user";
 
 function App() {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"))
+    console.log(user)
+    dispatch(setUser(user))
+
+  }, [])
   return (
     <Container className="App">
     <Header />
