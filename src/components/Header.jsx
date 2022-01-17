@@ -14,42 +14,53 @@ const Header = () => {
   const [basketIcon, setBasketIcon] = useState(false);
   const [searchIcon, setSearchIcon] = useState(false);
 
-  const cart = useSelector(state => state.cart)
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
-    setBasketIcon(!basketIcon)
-  } , [cart.length])
+    setBasketIcon(!basketIcon);
+  }, [cart.length]);
   return (
-    <Container>
+    <Container className="p-4">
       <Link to="/">
         <Logo>
           <img src="/images/shopify_logo_darkbg.svg" />
         </Logo>
       </Link>
-      <Serach onMouseEnter={() => setSearchIcon(!searchIcon)}>
-        <span>
-          <Lottie
-            direction={searchIcon ? 1 : -1}
-            options={{
-              animationData: search,
-              loop: false,
-              autoplay: false,
-            }}
-          />
-        </span>
-        <input />
-      </Serach>
+      {
+        // <Serach onMouseEnter={() => setSearchIcon(!searchIcon)}>
+        //   <span>
+        //     <Lottie
+        //       direction={searchIcon ? 1 : -1}
+        //       options={{
+        //         animationData: search,
+        //         loop: false,
+        //         autoplay: false,
+        //       }}
+        //     />
+        //   </span>
+        //   <input />
+        // </Serach>
+      }
       <div>
-        <div onMouseEnter={() => setUserIcon(!userIcon)}>
-          <Lottie
-            direction={userIcon ? 1 : -1}
-            options={{
-              animationData: user,
-              loop: false,
-              autoplay: false,
-            }}
-          />
-        </div>
+        {
+          // <div onMouseEnter={() => setUserIcon(!userIcon)}>
+          //     <Lottie
+          //       direction={userIcon ? 1 : -1}
+          //       options={{
+          //         animationData: user,
+          //         loop: false,
+          //         autoplay: false,
+          //       }}
+          //     />
+          //   </div>
+        }
+        <SignIn className="">
+          <Link to="/signin" className="w-100">
+            <span className="w-100 d-flex justify-content-center align-items-center">
+              <h6 className="m-0">Sign In</h6>
+            </span>
+          </Link>
+        </SignIn>
         <Link to="cart">
           <div
             className="basket"
@@ -80,7 +91,7 @@ const Container = styled.header`
   width: 100%;
   background-color: #363671;
   color: #ffffff;
-  padding: 1rem 1rem !important;
+  /* padding: 1rem 1rem !important; */
   box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.3);
   position: fixed;
   z-index: 9999;
@@ -147,4 +158,10 @@ const Serach = styled.div`
     color: #ee537c;
   }
 `;
+const SignIn = styled.div`
+  width: 100px !important;
+  border-radius: 10px;
+  background-color: rgba(62, 81, 150, 1);
+`;
+
 export default Header;

@@ -3,6 +3,11 @@ import signUp from "../../assets/gif/Mobile login-pana.svg";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormControl from "../form/FormControl";
+import { Link, useNavigate } from "react-router-dom";
+import { Sugar } from "react-preloaders";
+import { registerUser } from "../../services/userServices";
+import { useState } from "react";
+import { toast } from 'react-toastify';
 
 const initialValues = {
   fullname: "",
@@ -21,14 +26,52 @@ const validationSchema = Yup.object({
   passwordConfirmation: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Passwords must match"
-  ),
+  ).required("Required"),
 });
 
-const onSubmit = (values) => {
-  console.log(values);
-};
+
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+  const onSubmit = async (values) => {
+    const {fullname, email, password, passwordConfirmation} = values
+    const user = {
+      fullname,
+      email,
+      password,
+    };
+    console.log(user)
+    try {
+      setLoading(true);
+      const { status } = await registerUser(user);
+      console.log(status);
+      if(status === 201){
+        setLoading(false);
+        navigate('/signin')
+        toast.success('User created', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
+      }
+    }catch(err){
+      console.log(err)
+      toast.error(`${err.message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+  };
   return (
     <Container>
       <Content className="container-fluid row p-0 mx-0">
@@ -37,7 +80,7 @@ const SignUp = () => {
             <img className="img-fluid" src={signUp} />
           </div>
         </LeftBar>
-        <RigtBar className="col-12 col-md-6 pt-5">
+        <RigtBar className="col-12 col-md-6 pt-5 px-5">
           <div>
             <div>
               <h3>Welcome to Shopify</h3>
@@ -47,6 +90,8 @@ const SignUp = () => {
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={onSubmit}
+              validateOnMount
+              
             >
               {(formik) => (
                 <Form>
@@ -78,10 +123,16 @@ const SignUp = () => {
                     <button
                       disabled={!formik.isValid}
                       type="submit"
-                      className="btn btn-primary w-100 mx-auto mt-5 mb-2"
+                      className="btn btn-primary w-100 mx-auto mt-5 mb-2 p-3"
                     >
                       Sign up
                     </button>
+                  </div>
+                  <div className="signIn d-flex justify-content-center align-items-center mt-3 mb-3">
+                    <span className="text-muted">Already have an account?</span>
+                    <Link className="text-decoration-none" to="/signin">
+                      <span>Sign in</span>
+                    </Link>
                   </div>
                 </Form>
               )}
@@ -92,11 +143,16 @@ const SignUp = () => {
               <p className="bg-white px-2 text-muted">Or sign Up with</p>
             </div>
             <div className="d-flex justify-content-around align-items-center w-100">
-                <div className="border rounded p-3"> <i class="bi bi-google"></i></div>
-                <div className="border rounded p-3"> <i class="bi bi-facebook"></i></div>
-                <div className="border rounded p-3"> <i class="bi bi-apple"></i></div>
+              <div className="border rounded p-3">
+                <i class="bi bi-google"></i>
+              </div>
+              <div className="border rounded p-3">
+                <i class="bi bi-facebook"></i>
+              </div>
+              <div className="border rounded p-3">
+                <i class="bi bi-apple"></i>
+              </div>
             </div>
-            <p></p>
           </SignUpOption>
         </RigtBar>
       </Content>
@@ -138,10 +194,30 @@ const RigtBar = styled.div`
   @media (max-width: 768px) {
     /* height: 300px; */
   }
+  button {
+    background-color: rgba(62, 81, 150, 0.9);
+    border: none;
+    font-size: 18px;
+    &:hover {
+      background-color: rgba(62, 81, 150, 1);
+      box-shadow: 0px 0px 12px -1px rgba(62, 81, 150, 0.5);
+    }
+    &:disabled{
+      background-color: rgba(62, 81, 150, 1);
+    }
+  }
+  .signIn {
+    a{
+      span{
+        color:#3E5196;
+        font-size: 18px;
+      }
+    }
+  }
 `;
 const SignUpOption = styled.div`
-    .otherOption{
-        position: relative;
+  .otherOption {
+    position: relative;
     p {
       /* width: 100%; */
       margin: 0 auto;
@@ -157,7 +233,6 @@ const SignUpOption = styled.div`
       /* top: 0; */
       width: 100%;
     }
-    }
-  
+  }
 `;
 export default SignUp;

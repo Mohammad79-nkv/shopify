@@ -3,6 +3,14 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import SignInGif from "../../assets/gif/Mobile login (3).gif";
 import FormControl from "../form/FormControl";
+import { Link } from "react-router-dom";
+import { loginUser } from "../../services/userServices";
+import jwt from 'jwt-decode'
+import { useDispatch } from "react-redux";
+import {useNavigate} from "react-router-dom"
+
+// import { deCodedToken } from './../../utils/deCodedToken';
+import { setUser } from './../../reducers/user';
 
 const initialValues = {
   email: "",
@@ -16,20 +24,36 @@ const validationSchema = Yup.object({
     .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
 });
 
-const onSubmit = (values) => {
-  console.log(values);
-};
 
 const SignIn = () => {
+  const dispatch =useDispatch();
+  const navigate = useNavigate();
+  const onSubmit = async (values) => {
+    const {email, password} = values
+    const user ={
+      email, 
+      password
+    }
+    console.log("object")
+    try {
+      const { status, data } = await loginUser(user);
+      // const user = deCodedToken(data.token)
+      console.log(status);
+      const userLogedIn = jwt(data.token).user
+      dispatch(setUser(userLogedIn))
+      navigate("/", {replace : true})
+
+    }catch(err) {}
+  };
   return (
     <Container className="h-100">
       <Content className="container-fluid row p-0 m-0 ">
-        <LeftBar className="col-12 col-lg-6 m-0">
+        <LeftBar className="col-12 col-md-6 m-0">
           <div className="d-flex justify-content-center align-items-center ">
             <img className="img-fluid" type="gif" src={SignInGif} />
           </div>
         </LeftBar>
-        <RigtBar className="col-12 col-lg-6 pt-5 px-lg-5">
+        <RigtBar className="col-12 col-md-6 pt-5 px-lg-5">
           <div>
             <div className="d-flex flex-column justify-content-center align-items-start">
               <h3>Welcome back</h3>
@@ -39,6 +63,8 @@ const SignIn = () => {
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={onSubmit}
+              validateOnChange={true}
+              validateOnMount
             >
               {(formik) => (
                 <Form>
@@ -68,7 +94,7 @@ const SignIn = () => {
                     </a>
                   </div>
                   <div className="w-100 d-flex justify-content-center">
-                    <button type="submit" className="btn w-100 mx-auto">
+                    <button disabled={!formik.isValid} type="submit" className="btn w-100 mx-auto p-3">
                       Submit
                     </button>
                   </div>
@@ -78,7 +104,9 @@ const SignIn = () => {
           </div>
           <div className="signUp d-flex justify-content-center align-items-center mt-3 mb-3">
             <span className="text-muted">Don`t have an account?</span>
-            <span>Sign up for free</span>
+            <Link className="text-decoration-none ms-1" to="/signup">
+              <span>Sign up for free</span>
+            </Link>
           </div>
         </RigtBar>
       </Content>
@@ -111,8 +139,8 @@ const LeftBar = styled.div`
       margin: 0 auto;
     }
   }
-  @media (min-width: 992px) {
-      height: calc(100vh - 80px);;
+  @media (min-width: 768px) {
+    height: calc(100vh - 80px);
     div {
       height: 100%;
       border: none;
@@ -128,26 +156,28 @@ const LeftBar = styled.div`
 `;
 const RigtBar = styled.div`
   /* border:1px solid rgba(0, 0, 0, 1); */
-  background-color: rgba(238, 83, 124, 0.6);
+  background-color: white;
   height: 540px;
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     background-color: white;
   }
   button {
-    background-color: rgba(54, 54, 113, 1);
+    background-color: rgba(238, 83, 124, 0.9);
     color: white;
     font-size: 18px;
-    padding: 0.7rem 1rem ;
     &:hover {
-        color: white;
-        box-shadow: 0px 0px 12px -1px rgba(54, 54, 113, 0.5)
+      color: white;
+      box-shadow: 0px 0px 12px -1px rgba(238, 83, 124, 0.5);
+      background-color: rgba(238, 83, 124, 1);
     }
   }
   .signUp {
-      span:nth-of-type(2){
-        color: #363671;
-        /* font-weight: bold; */
-        font-size:18px;
+    a{
+      span {
+      color: #EE537C;
+      /* font-weight: bold; */
+      font-size: 18px;
+    }
     }
   }
 `;
