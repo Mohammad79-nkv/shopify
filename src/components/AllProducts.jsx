@@ -34,10 +34,13 @@ const AllProducts = () => {
   }, []);
 
   const handleFilter = (e) => {
+    e.preventDefault();
     setCategoryTitle(e.target.innerText);
     dispatch(filterProducts(e));
+    setSortTitle("")
   };
   const handleSort = (e) => {
+    e.preventDefault();
     setSortTitle(e.target.innerText);
     dispatch(sortProduct(e));
   };
@@ -54,20 +57,17 @@ const AllProducts = () => {
   return (
     <Container>
       <Serach className="mb-5" onMouseEnter={() => setSearchIcon(!searchIcon)}>
-          <span>
-            <Lottie
-              direction={searchIcon ? 1 : -1}
-              options={{
-                animationData: search,
-                loop: false,
-                autoplay: false,
-              }}
-            />
-          </span>
-          <input
-            placeholder="Inter your product title ..."
-            
+        <span>
+          <Lottie
+            direction={searchIcon ? 1 : -1}
+            options={{
+              animationData: search,
+              loop: false,
+              autoplay: false,
+            }}
           />
+        </span>
+        <input placeholder="Inter your product title ..." />
       </Serach>
       <ManageProducts className="d-flex p-5 justify-content-around justify-content-lg-center mx-lg-5 ">
         <div class="dropdown  me-lg-5">
@@ -89,8 +89,7 @@ const AllProducts = () => {
                 data-sortItem="p-Descending"
                 onClick={(e) => handleSort(e)}
               >
-                <i class="bi bi-sort-down mx-1"></i>
-                <span>Price (High to Low)</span>
+                <i class="bi bi-sort-down mx-1"></i>Price (High to Low)
               </a>
             </li>
             <li>

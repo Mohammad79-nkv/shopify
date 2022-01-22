@@ -37,7 +37,8 @@ const Recommend = ({ category }) => {
 
 const Container = styled.div`
   position: relative;
-  background: rgba(235, 146, 123, 0.7);
+  background: rgba(62, 81, 150, 0.3);
+  border-radius: 20px 0 0 0;
   width: 100vw;
   h4 {
     border-bottom: 1px solid rgba(54, 54, 113, 1);
@@ -48,8 +49,8 @@ const Container = styled.div`
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(235, 146, 123, 0.7) 63%,
-      rgba(235, 146, 123, 0.7) 100%
+      rgba(62, 81, 150, 0.3) 63%,
+      rgba(62, 81, 150, 0.3) 100%
     );
     position: absolute;
     top: 0;

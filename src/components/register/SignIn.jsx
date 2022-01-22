@@ -5,17 +5,31 @@ import SignInGif from "../../assets/gif/Mobile login (3).gif";
 import FormControl from "../form/FormControl";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../services/userServices";
-import jwt from 'jwt-decode'
-import { useDispatch } from "react-redux";
-import {useNavigate} from "react-router-dom"
+import jwt from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { css } from "@emotion/react";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import { setUser } from "./../../reducers/user";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
-// import { deCodedToken } from './../../utils/deCodedToken';
-import { setUser } from './../../reducers/user';
 
+//per loader css
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  z-index:999;
+`;
+
+//form initial Values
 const initialValues = {
   email: "",
   password: "",
 };
+
+//form validation
 const validationSchema = Yup.object({
   email: Yup.string().email("Enter a valid email").required("Required"),
   password: Yup.string()
@@ -24,30 +38,70 @@ const validationSchema = Yup.object({
     .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
 });
 
-
 const SignIn = () => {
-  const dispatch =useDispatch();
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
+
+  //submit function
   const onSubmit = async (values) => {
-    const {email, password} = values
-    const user ={
-      email, 
-      password
-    }
-    console.log("object")
+    const { email, password } = values;
+    const user = {
+      email,
+      password,
+    };
+    console.log("object");
+    setLoading(true);
     try {
       const { status, data } = await loginUser(user);
       // const user = deCodedToken(data.token)
       console.log(status);
-      const userLogedIn = jwt(data.token).user
-      dispatch(setUser(userLogedIn))
-      localStorage.setItem("user", JSON.stringify(userLogedIn))
-      navigate("/", {replace : true})
-
-    }catch(err) {}
+      const userLogedIn = jwt(data.token).user;
+      const firstName = userLogedIn.fullname.split(" ")[0];
+      dispatch(setUser(userLogedIn));
+      localStorage.setItem("user", JSON.stringify(userLogedIn));
+      navigate("/", { replace: true });
+      setLoading(false);
+      toast.success(`Hello again ${firstName}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (err) {
+      setLoading(false);
+      toast.error(`Incorrect email or password`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
+
+  if (user.fullname) {
+    navigate("/");
+  }
+
   return (
     <Container className="h-100">
+      {loading ? (
+        <Preloader className="position-fixed top-0 bottom-0 left-0 right-0 w-100 bg-white d-flex justify-content-center align-items-center">
+          <ClimbingBoxLoader
+            color={"#363671"}
+            loading={loading}
+            css={override}
+          />
+        </Preloader>
+      ) : null}
       <Content className="container-fluid row p-0 m-0 ">
         <LeftBar className="col-12 col-md-6 m-0">
           <div className="d-flex justify-content-center align-items-center ">
@@ -66,6 +120,7 @@ const SignIn = () => {
               onSubmit={onSubmit}
               validateOnChange={true}
               validateOnMount
+              validateOnBlur
             >
               {(formik) => (
                 <Form>
@@ -73,13 +128,13 @@ const SignIn = () => {
                     control="input"
                     type="email"
                     name="email"
-                    lable="email"
+                    lable="email *"
                   />
                   <FormControl
                     control="input"
                     type="password"
                     name="password"
-                    lable="password"
+                    lable="password *"
                   />
                   <div className="d-flex justify-content-between my-3">
                     <div className="d-flex align-items-center">
@@ -95,7 +150,11 @@ const SignIn = () => {
                     </a>
                   </div>
                   <div className="w-100 d-flex justify-content-center">
-                    <button disabled={!formik.isValid} type="submit" className="btn w-100 mx-auto p-3">
+                    <button
+                      disabled={!formik.isValid}
+                      type="submit"
+                      className="btn w-100 mx-auto p-3"
+                    >
                       Submit
                     </button>
                   </div>
@@ -124,6 +183,9 @@ const Container = styled.div`
     object-fit: contain;
     /* display:none; */
   } */
+`;
+const Preloader = styled.div`
+  z-index: 99;
 `;
 const Content = styled.div`
   height: calc(100% - 50px);
@@ -173,12 +235,12 @@ const RigtBar = styled.div`
     }
   }
   .signUp {
-    a{
+    a {
       span {
-      color: #EE537C;
-      /* font-weight: bold; */
-      font-size: 18px;
-    }
+        color: #ee537c;
+        /* font-weight: bold; */
+        font-size: 18px;
+      }
     }
   }
 `;

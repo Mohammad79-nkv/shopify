@@ -4,11 +4,25 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormControl from "../form/FormControl";
 import { Link, useNavigate } from "react-router-dom";
-import { Sugar } from "react-preloaders";
 import { registerUser } from "../../services/userServices";
 import { useState } from "react";
 import { toast } from 'react-toastify';
+import { useSelector } from "react-redux";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import { css } from "@emotion/react";
 
+
+
+
+//perloader css
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  z-index:999;
+`;
+
+//form initial values
 const initialValues = {
   fullname: "",
   email: "",
@@ -16,6 +30,7 @@ const initialValues = {
   passwordConfirmation: "",
 };
 
+//form validation
 const validationSchema = Yup.object({
   fullname: Yup.string().required("Required"),
   email: Yup.string().email("Enter a valid email").required("Required"),
@@ -33,7 +48,10 @@ const validationSchema = Yup.object({
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.user)
   const navigate = useNavigate()
+
+  //submit function
   const onSubmit = async (values) => {
     const {fullname, email, password, passwordConfirmation} = values
     const user = {
@@ -72,8 +90,22 @@ const SignUp = () => {
         });
     }
   };
+
+  if (user.fullname){
+    navigate("/")
+  }
+
   return (
     <Container>
+    {loading ? (
+      <Preloader className="position-fixed top-0 bottom-0 left-0 right-0 w-100 bg-white d-flex justify-content-center align-items-center">
+        <ClimbingBoxLoader
+          color={"#363671"}
+          loading={loading}
+          css={override}
+        />
+      </Preloader>
+    ) : null}
       <Content className="container-fluid row p-0 mx-0">
         <LeftBar className="col-12 col-md-6 m-0 d-flex justify-content-center align-items-center ">
           <div className="">
@@ -99,25 +131,25 @@ const SignUp = () => {
                     control="input"
                     type="text"
                     name="fullname"
-                    lable="Full name"
+                    lable="Full name *"
                   />
                   <FormControl
                     control="input"
                     type="email"
                     name="email"
-                    lable="Email"
+                    lable="Email *"
                   />
                   <FormControl
                     control="input"
                     type="password"
                     name="password"
-                    lable="Password"
+                    lable="Password *"
                   />
                   <FormControl
                     control="input"
                     type="password"
                     name="passwordConfirmation"
-                    lable="Confirm password"
+                    lable="Confirm password *"
                   />
                   <div className="w-100 d-flex justify-content-center">
                     <button
@@ -163,16 +195,16 @@ const SignUp = () => {
 const Container = styled.div`
   min-height: calc(100vh - 80px);
 `;
+const Preloader = styled.div`
+  z-index: 99;
+`;
 const Content = styled.div`
   margin-top: 80px;
-  /* height: calc(100vh - 80px); */
   height: 100%;
 `;
 const LeftBar = styled.div`
   background-color: rgba(127, 17, 224, 0.5);
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+
   height: 100vh;
   div {
     img {
@@ -191,9 +223,6 @@ const LeftBar = styled.div`
   }
 `;
 const RigtBar = styled.div`
-  @media (max-width: 768px) {
-    /* height: 300px; */
-  }
   button {
     background-color: rgba(62, 81, 150, 0.9);
     border: none;
@@ -228,9 +257,6 @@ const SignUpOption = styled.div`
       position: absolute;
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
       bottom: 11px;
-      /* left: 0; */
-      /* right: 0; */
-      /* top: 0; */
       width: 100%;
     }
   }

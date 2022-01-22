@@ -33,8 +33,11 @@ export const filterProducts = (e) => {
 export const sortProduct = (e) => {
   return async (dispatch, getState) => {
     const allProducts = [...getState().products.filteredProducts];
+    // console.log(allProducts)
     const sortTitle = e.target.dataset.sortitem;
     let sortedProducts = [];
+    // console.log(sortTitle);
+    console.log(e.target.dataset);
     switch (sortTitle) {
       case "p-Descending":
         sortedProducts = allProducts.sort((a, b) => b.price - a.price);
@@ -53,6 +56,7 @@ export const sortProduct = (e) => {
       default:
         sortedProducts = allProducts;
     }
+    // console.log(sortedProducts);
     await dispatch({ type: "SORT", payload: sortedProducts });
   };
 };

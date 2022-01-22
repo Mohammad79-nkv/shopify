@@ -2,6 +2,7 @@ import styled from "styled-components";
 import BrandSlick from "./BrandSlick";
 import MainSlick from "./mainSlick";
 import Products from "./Products";
+import AllProducts from './AllProducts';
 
 
 const Home = () => {
@@ -9,7 +10,7 @@ const Home = () => {
     <>
       <MainSlick />
       <BrandSlick />
-      <Products/>
+      <AllProducts/>
     </>
   );
 };

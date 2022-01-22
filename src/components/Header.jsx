@@ -72,7 +72,7 @@ const Header = () => {
                 <div className="userDetail d-flex align-items-center justify-content-start w-100 mb-2">
                   <i class="bi bi-person-circle mx-1 w-25  font"></i>
                   <div className="d-flex flex-column w-100">
-                    <h5 className="m-0 p-0 text-capitalize text">
+                    <h5 className="m-0 p-0 text-capitalize text-black">
                       {user.fullname}
                     </h5>
                     <small className="m-0 p-0 text-wrap text-muted">
@@ -175,12 +175,13 @@ const Container = styled.header`
     position: relative;
     .UserInfo {
       display: none!important;
+      box-shadow: 0px 0px 12px -1px rgba(54, 54, 113, 0.5);
       position: absolute;
       top: 45px;
       /* right:10px; */
       left: -110px;
       width: auto;
-      background-color: #3e5196;
+      background-color: white;
       transition: all 0.2s ease-in-out;
       .userDetail {
         i:nth-child(1) {
@@ -193,9 +194,9 @@ const Container = styled.header`
         border-top: 1px solid rgba(238, 83, 124, 0.8);
         button {
           color: white;
-          background-color: rgba(238, 83, 124, 0.2);
+          background-color: rgba(238, 83, 124, 0.8);
           &:hover {
-            background-color: rgba(238, 83, 124, 0.8);
+            background-color: rgba(238, 83, 124, 1);
           }
         }
       }

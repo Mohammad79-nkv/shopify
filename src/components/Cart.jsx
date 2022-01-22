@@ -10,6 +10,7 @@ const Cart = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
 
   const emptyCart = cartItems.length === 0;
 
@@ -19,9 +20,10 @@ const Cart = () => {
   };
 
   const handleTotalPrice = () => {
-    return cartItems.reduce((acc, item) => acc + item.price * item.count, 0).toFixed(2);
+    return cartItems
+      .reduce((acc, item) => acc + item.price * item.count, 0)
+      .toFixed(2);
   };
-  
 
   return (
     <Container className="w-100 p-0">
@@ -57,17 +59,27 @@ const Cart = () => {
           </ProductWrapper>
         </ProductCart>
         <CartInfo className="col-12 col-md-4">
-          <UserInfo>
-            <h4>User information</h4>
-            <div className="mb-2">
-              <h6>Name</h6>
-              <p>Mohammad</p>
+          {user.fullname ? (
+            <UserInfo>
+              <h4>User information :</h4>
+              <div className="mb-2">
+                <h6>Name</h6>
+                <p>{user.fullname}</p>
+              </div>
+              <div>
+                <h6>EMAIL</h6>
+                <p>{user.email}</p>
+              </div>
+            </UserInfo>
+          ) : (
+            <div className="mt-md-5 d-flex flex-md-column mt-3 justify-content-center align-items-center border-">
+              <h4>You are not logged in</h4>
+              <Link to={"/signin"}>
+                <button className="btn btn-primary ms-5 ms-md-0 px-4">Sign in</button>
+              </Link>
             </div>
-            <div>
-              <h6>ADRESS</h6>
-              <p>Khiban Piroozi</p>
-            </div>
-          </UserInfo>
+          )}
+
           <CartFooter>
             <TotalPrice className="my-4">
               <h5>Total Price:</h5>

@@ -35,16 +35,14 @@ const Product = (props) => {
   };
   return (
     <Card>
-      <Link to={`p/${id}`}>
+      <Link to={`products/p/${id}`}>
         <CardImg>
           <img src={image} />
         </CardImg>
       </Link>
       <CardContent>
         <h2 className="product-title">{title}</h2>
-        <p className="product-description">
-          {description.split(" ").slice(0, 10).join(" ")} ...
-        </p>
+        
         <div className="product-info">
           <div className="rating">
             <Rating name="read-only" value={rating} readOnly />
@@ -52,7 +50,6 @@ const Product = (props) => {
           </div>
         </div>
       </CardContent>
-      {pathname === "/" ? null : (
         <CardFooter>
           <Price>
             <span>Price</span>
@@ -85,7 +82,6 @@ const Product = (props) => {
             )}
           </button>
         </CardFooter>
-      )}
     </Card>
   )
 };
