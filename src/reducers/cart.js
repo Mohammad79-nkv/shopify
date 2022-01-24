@@ -2,14 +2,12 @@ export const addToCart = (id) => {
   return async (dispatch, getState) => {
     const allProduct = [...getState().products.filteredProducts];
     const product = { ...allProduct.find((p) => p.id === id), count: 1 };
-    // console.log(product);
     await dispatch({ type: "ADD_TO_CART", payload: product });
+    localStorage.setItem("cart", JSON.stringify(getState().cart));
   };
 };
 
 export const handleCountAction = (id, e) => {
-  console.log("hello");
-  console.log("2");
   return async (dispatch, getState) => {
     const countAction = e.currentTarget.dataset.count;
     const allCartItems = [...getState().cart];
@@ -24,6 +22,7 @@ export const handleCountAction = (id, e) => {
     }
     allCartItems[cartItemIndx] = cartItem;
     await dispatch({ type: "CHANGE_NUMBER_CART", payload: allCartItems });
+    localStorage.setItem("cart", JSON.stringify(getState().cart));
   };
 };
 
@@ -32,17 +31,28 @@ export const handleDeleteItem = (id) => {
     const allCartItems = [...getState().cart];
     const newCartItems = allCartItems.filter((i) => i.id !== id);
     await dispatch({ type: "REMOVE_CART_ITEM", payload: newCartItems });
+    localStorage.setItem("cart", JSON.stringify(getState().cart));
+  };
+};
+
+export const initCart = (payload) => {
+  return async (dispatch) => {
+    await dispatch({ type: "INIT_CART", payload });
   };
 };
 
 export const clearCart = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     await dispatch({ type: "CLEAR_CART", payload: [] });
+    localStorage.setItem("cart", JSON.stringify(getState().cart));
+
   };
 };
 
 const cartReducer = (state = [], action) => {
   switch (action.type) {
+    case "INIT_CART":
+      return action.payload;
     case "ADD_TO_CART":
       //   state.push(action.payload)
       return [...state, action.payload];

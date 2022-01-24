@@ -26,8 +26,7 @@ const AllProducts = () => {
   const productLoader = useSelector((state) => state.productLoader);
   const [searchIcon, setSearchIcon] = useState(false);
   const ref = useRef();
-  // const history = useHistory();
-  //   const products = allProducts.slice(0, 5);
+ 
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCategories());
@@ -51,12 +50,10 @@ const AllProducts = () => {
     handleFilter(e);
   };
 
-  // const handleSearch = () => {
-  //   <Redirect/>
-  // }
+
   return (
-    <Container>
-      <Serach className="mb-5" onMouseEnter={() => setSearchIcon(!searchIcon)}>
+    <Container className="mt-5">
+      <Serach className="mb-5 mt-5" onMouseEnter={() => setSearchIcon(!searchIcon)}>
         <span>
           <Lottie
             direction={searchIcon ? 1 : -1}
@@ -187,15 +184,16 @@ const AllProducts = () => {
   );
 };
 const ManageProducts = styled.div`
-  border-top: 1px solid rgba(0, 0, 0, 0.7);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 `;
 const Content = styled.div`
   width: 100%;
   margin-top: 80px;
 `;
 const Container = styled.div`
+  border-top: 1px solid rgba(0, 0, 0, 0.7);
+
   min-height: calc(100vh + 80px);
-  margin-top: 180px;
 `;
 const SortFilterInfo = styled.div`
   div {

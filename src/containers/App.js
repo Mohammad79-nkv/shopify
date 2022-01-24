@@ -13,21 +13,28 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SignIn from "../components/register/SignIn";
 import SignUp from "../components/register/SignUp";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../reducers/user";
+import { initCart } from "../reducers/cart";
 
 function App() {
   const { pathname } = useLocation();
+  const cart = useSelector(state => state.cart)
   const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"))
-    console.log(user)
+    const cartItem = JSON.parse(localStorage.getItem("cart"))
     dispatch(setUser(user))
+    dispatch(initCart(cartItem))
 
   }, [])
+  // useEffect(()=>{
+  //   // if(localStorage.cart)
+  //   localStorage.setItem("cart", JSON.stringify(cart))
+  // },[cart])
   return (
     <Container className="App">
     <Header />

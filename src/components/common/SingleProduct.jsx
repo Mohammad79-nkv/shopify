@@ -104,7 +104,7 @@ const SingleProduct = () => {
               <AddCart className="d-flex justify-content-around py-3">
                 <div className="d-flex flex-column px-3">
                   <p className="m-0 text-muted">Price</p>
-                  <p className="m-0 font-weight-bold">{product.price} $</p>
+                  <p className="m-0 font-weight-bold">$ {product.price}</p>
                 </div>
                 <button
                   disabled={isExistInCart}

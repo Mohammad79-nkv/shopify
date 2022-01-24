@@ -22,7 +22,7 @@ const Product = (props) => {
 
   const handleAddToCart = () => {
     console.log("object");
-    toast.success(`${title} added to cart`, {
+    toast.success(<p><span style={{fontWeight: "bold"}}>{title}</span> add to cart</p>, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -35,7 +35,7 @@ const Product = (props) => {
   };
   return (
     <Card>
-      <Link to={`products/p/${id}`}>
+      <Link to={`/products/p/${id}`}>
         <CardImg>
           <img src={image} />
         </CardImg>

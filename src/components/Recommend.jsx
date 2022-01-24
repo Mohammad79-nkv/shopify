@@ -49,8 +49,8 @@ const Container = styled.div`
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(62, 81, 150, 0.3) 63%,
-      rgba(62, 81, 150, 0.3) 100%
+      rgba(188, 193, 214, 1) 100%,
+      rgba(188, 193, 214, 1) 100%
     );
     position: absolute;
     top: 0;
@@ -95,7 +95,7 @@ const Content = styled.div`
     display: none;
   }
   -ms-overflow-style: none;
-  scrollbar-width: none; 
+  scrollbar-width: none;
 `;
 
 export default Recommend;
