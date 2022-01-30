@@ -82,10 +82,10 @@ const Cart = () => {
 
           <CartFooter>
             <TotalPrice className="my-4">
-              <h5>Total Price:</h5>
-              <span>{handleTotalPrice().toString()} $</span>
+              <h6>Total Price:</h6>
+              <h5>{handleTotalPrice().toString()} $</h5>
             </TotalPrice>
-            <CartAction className="d-flex justify-content-center w-100 mt-4">
+            <CartAction className="d-flex justify-content-center w-100 mt-4 mb-2">
               <button
                 className="clear"
                 onClick={() => setShowModal(!showModal)}
@@ -93,7 +93,7 @@ const Cart = () => {
               >
                 Clear Cart
               </button>
-              <button className="confirm" disabled={emptyCart}>
+              <button className="confirm " disabled={emptyCart}>
                 Confirm
               </button>
             </CartAction>
@@ -147,7 +147,7 @@ const ProductCart = styled.div`
   }
 `;
 const CartInfo = styled.div`
-  height: 230px;
+  /* height: 230px; */
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -155,7 +155,7 @@ const CartInfo = styled.div`
   align-items: center;
   @media (max-width: 768px) {
     position: fixed;
-    bottom: -5px;
+    bottom: 0px;
     right: 0;
     width: 100%;
     z-index: 999;

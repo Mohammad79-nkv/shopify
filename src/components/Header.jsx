@@ -21,7 +21,6 @@ const Header = () => {
 
   useEffect(() => {
     setBasketIcon(!basketIcon);
-    console.log(user);
   }, [cart.length]);
 
   const handleLogOut = () => {
@@ -36,21 +35,6 @@ const Header = () => {
           <img src="/images/shopify_logo_darkbg.svg" />
         </Logo>
       </Link>
-      {
-        // <Serach onMouseEnter={() => setSearchIcon(!searchIcon)}>
-        //   <span>
-        //     <Lottie
-        //       direction={searchIcon ? 1 : -1}
-        //       options={{
-        //         animationData: search,
-        //         loop: false,
-        //         autoplay: false,
-        //       }}
-        //     />
-        //   </span>
-        //   <input />
-        // </Serach>
-      }
       <div>
         {user.fullname ? (
           <Fragment>
@@ -121,7 +105,7 @@ const Header = () => {
 };
 
 const Container = styled.header`
-  /* height: 50px; */
+  height: 90px;
   display: flex;
   justify-content: space-between;
   align-items: center;

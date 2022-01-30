@@ -162,9 +162,9 @@ const AllProducts = () => {
         )}
       </ManageProducts>
       <SortFilterInfo className="w-100 d-flex justify-content-center">
-        <div className=" w-50 d-flex justify-content-between">
+        <div className=" w-50 d-flex justify-content-between flex-column flex-md-row">
           {sortTitle !== "" && (
-            <div>
+            <div className="mb-3">
               <span className="text-muted">Sort By : </span>
               <span>{sortTitle}</span>
             </div>

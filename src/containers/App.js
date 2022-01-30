@@ -16,6 +16,7 @@ import SignUp from "../components/register/SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../reducers/user";
 import { initCart } from "../reducers/cart";
+import NotFound from './../components/NotFound';
 
 function App() {
   const { pathname } = useLocation();
@@ -28,7 +29,9 @@ function App() {
     const user = JSON.parse(localStorage.getItem("user"))
     const cartItem = JSON.parse(localStorage.getItem("cart"))
     dispatch(setUser(user))
-    dispatch(initCart(cartItem))
+    if(cartItem){
+      dispatch(initCart(cartItem))
+    }
 
   }, [])
   // useEffect(()=>{
@@ -46,6 +49,7 @@ function App() {
         <Route path="/products/p/:id" element={<SingleProduct />} />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
 
       <Footer />
