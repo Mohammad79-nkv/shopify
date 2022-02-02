@@ -62,7 +62,7 @@ const Product = (props) => {
           >
             {isExistInCart ? (
               <Fragment>
-              <i class="bi bi-check-lg"></i>
+              <i className="bi bi-check-lg"></i>
               <span>In cart</span>
               </Fragment>
             ) : (

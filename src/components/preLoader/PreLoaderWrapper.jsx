@@ -7,8 +7,7 @@ const PreLoaderWrapper = () => {
   for(let i = 0; i < productLoader.length; i++){
       arr.push(i)
   }
-  console.log(productLoader)
-  return arr.map(() => <ProductPerLoader />);
+  return arr.map((_,index) => <ProductPerLoader key={index}/>);
 };
 
 export default PreLoaderWrapper;

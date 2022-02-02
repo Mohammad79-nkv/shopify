@@ -44,11 +44,11 @@ function App() {
     <ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/products" element={<AllProducts />} />
-        <Route path="/products/p/:id" element={<SingleProduct />} />
-        <Route path="/signIn" element={<SignIn />} />
-        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/cart/" element={<Cart />} />
+        <Route path="/products/" element={<AllProducts />} />
+        <Route path="/products/p/:id/" element={<SingleProduct />} />
+        <Route path="/signIn/" element={<SignIn />} />
+        <Route path="/signUp/" element={<SignUp />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
 

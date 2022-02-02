@@ -13,7 +13,7 @@ const Recommend = ({ category }) => {
       <h4 className="px-2 pb-2">Other {category}</h4>
       <Content className="d-flex flex-nowrap overflow-auto py-3 px-2">
         {recommendProducts.map((p) => (
-          <div className="bg-white bg-white ms-2">
+          <div className="bg-white bg-white ms-2" key={p.id}>
             <img src={p.image} />
             {
               <Link to={`/products/p/${p.id}`}>
@@ -21,7 +21,7 @@ const Recommend = ({ category }) => {
                   <small className="text-white">{p.title}</small>
 
                   <div>
-                    <i class="bi bi-star-fill text-warning me-2"></i>
+                    <i className="bi bi-star-fill text-warning me-2"></i>
                     <small className="text-white">{p.rating.rate}</small>
                   </div>
                 </div>

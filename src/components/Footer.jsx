@@ -40,11 +40,11 @@ const Footer = () => {
           <div className="social-media mb-4 w-100 pb-3">
             <h6>FOLLOW US</h6>
             <div className="d-flex justify-content-evenly w-100">
-              <i class="bi bi-instagram"></i>
-              <i class="bi bi-linkedin"></i>
-              <i class="bi bi-twitter"></i>
-              <i class="bi bi-facebook"></i>
-              <i class="bi bi-youtube"></i>
+              <i className="bi bi-instagram"></i>
+              <i className="bi bi-linkedin"></i>
+              <i className="bi bi-twitter"></i>
+              <i className="bi bi-facebook"></i>
+              <i className="bi bi-youtube"></i>
             </div>
           </div>
           <div className="my-4">
@@ -53,11 +53,11 @@ const Footer = () => {
             </h6>
             <div className="d-flex d-md-flex flex-md-column">
               <input
-                class="form-control "
+              className="form-control "
                 type="email"
                 placeholder="Enter your Email ..."
               />
-              <button class="btn mx-3 mt-md-1">Confirm</button>
+              <button className="btn mx-3 mt-md-1">Confirm</button>
             </div>
           </div>
         </div>
@@ -66,11 +66,11 @@ const Footer = () => {
         <h6 className="text-center ">
           Develop with{" "}
           <span>
-            <i class="bi bi-suit-heart-fill"></i>
+            <i className="bi bi-suit-heart-fill"></i>
           </span>{" "}
           ,{" "}
           <span>
-            <i class="bi bi-cup-fill"></i>
+            <i className="bi bi-cup-fill"></i>
           </span>{" "}
           by Mohammad Nikvarz
         </h6>

@@ -6,7 +6,6 @@ export const addToCart = (id) => {
     localStorage.setItem("cart", JSON.stringify(getState().cart));
   };
 };
-
 export const handleCountAction = (id, e) => {
   return async (dispatch, getState) => {
     const countAction = e.currentTarget.dataset.count;

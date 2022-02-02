@@ -20,8 +20,6 @@ const SingleProduct = () => {
   const cart = useSelector((state) => state.cart);
   const productId = product.id;
   const rate = !product.rating ? { rate: 5, count: 5 } : product.rating;
-  // const {rating} = product
-  // console.log(product);
 
   const satisfactionPercentage = (rate.rate / 5) * 100;
 
@@ -57,10 +55,10 @@ const SingleProduct = () => {
               />
             </div>
             <div className="d-flex justify-content-between me-5 ps-2 py-3">
-              <i class="bi bi-heart"></i>
-              <i class="bi bi-share-fill"></i>
-              <i class="bi bi-bell"></i>
-              <i class="bi bi-graph-up"></i>
+              <i className="bi bi-heart"></i>
+              <i className="bi bi-share-fill"></i>
+              <i className="bi bi-bell"></i>
+              <i className="bi bi-graph-up"></i>
             </div>
           </ProductImage>
           <ProductInfo className="col-12 col-lg-8 col-xl-6 d-flex flex-column align-items-start py-3">
@@ -72,7 +70,7 @@ const SingleProduct = () => {
             </ProductTitle>
             <RatingDiv className="pb-4">
               <div className="d-flex justify-content-center align-items-center pt-2 mb-2">
-                <i class="bi bi-check-circle-fill me-1 text-primary"></i>{" "}
+                <i className="bi bi-check-circle-fill me-1 text-primary"></i>{" "}
                 <p className="text-muted m-0">
                   {satisfactionPercentage.toFixed()}% ({rate.count} people) of
                   buyers have offered this product
@@ -90,14 +88,14 @@ const SingleProduct = () => {
               </div>
               <div className="d-flex justify-content-start align-items-center px-3">
                 <p className="guarantee text text-muted font m-0 py-3">
-                  <i class="bi bi-shield-fill-check"></i> Guarantee of
+                  <i className="bi bi-shield-fill-check"></i> Guarantee of
                   authenticity and physical health of the product
                 </p>
               </div>
               <div className="delivery d-flex flex-column p-3 ">
                 <p>Available in Shopify warehouse</p>
                 <div>
-                  <i class="bi bi-truck me-2 red"></i>
+                  <i className="bi bi-truck me-2 red"></i>
                   <small>Delivery</small>
                 </div>
               </div>
@@ -113,7 +111,7 @@ const SingleProduct = () => {
                 >
                   {isExistInCart ? (
                     <Fragment>
-                      <i class="bi bi-check-lg"></i>
+                      <i className="bi bi-check-lg"></i>
                       <span>In cart</span>
                     </Fragment>
                   ) : (

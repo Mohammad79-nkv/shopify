@@ -54,7 +54,7 @@ const Header = () => {
               </div>
               <div className="UserInfo d-flex flex-column rounded-3">
                 <div className="userDetail d-flex align-items-center justify-content-start w-100 mb-2">
-                  <i class="bi bi-person-circle mx-1 w-25  font"></i>
+                  <i className="bi bi-person-circle mx-1 w-25  font"></i>
                   <div className="d-flex flex-column w-100">
                     <h5 className="m-0 p-0 text-capitalize text-black">
                       {user.fullname}
@@ -66,7 +66,7 @@ const Header = () => {
                 </div>
                 <div className="logOut w-100">
                   <button className="btn my-2 ms-3" onClick={handleLogOut}>
-                      <i class="bi bi-box-arrow-right text-reset"></i>
+                      <i className="bi bi-box-arrow-right text-reset"></i>
                     Log out
                   </button>
                 </div>

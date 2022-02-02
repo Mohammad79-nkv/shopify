@@ -67,7 +67,7 @@ const AllProducts = () => {
         <input placeholder="Inter your product title ..." />
       </Serach>
       <ManageProducts className="d-flex p-5 justify-content-around justify-content-lg-center mx-lg-5 ">
-        <div class="dropdown  me-lg-5">
+        <div className="dropdown  me-lg-5">
           <button
             class="btn btn-outline-dark dropdown-toggle me-lg-5"
             type="button"
@@ -118,11 +118,12 @@ const AllProducts = () => {
               className="btn-groupp d-flex w-100 justify-content-center d-none d-lg-flex"
             >
               {categories &&
-                categories.map((categorie) => (
+                categories.map((categorie, index) => (
                   <button
+                  key={index}
                     onClick={(e) => handleActive(e)}
                     type="button"
-                    class="btn btn-outline-success mx-1"
+                    className="btn btn-outline-success mx-1"
                     data-filter={categorie === "all" ? "" : categorie}
                   >
                     {categorie.toUpperCase()}
@@ -134,19 +135,19 @@ const AllProducts = () => {
           )}
         </div>
         {categories && (
-          <div class="dropdown d-lg-none">
+          <div className="dropdown d-lg-none">
             <button
-              class="btn btn-outline-dark dropdown-toggle"
+            className="btn btn-outline-dark dropdown-toggle"
               type="button"
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i class="bi bi-funnel"></i> categories
+              <i className="bi bi-funnel"></i> categories
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              {categories.map((categorie) => (
-                <li class=" cursor-pointer	">
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              {categories.map((categorie, index) => (
+                <li className=" cursor-pointer" key={index}>
                   <a
                     className="dropdown-item"
                     href="#"
