@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import styled from "styled-components";
-import { getSingleProduct } from "../../reducers/singleProduct";
+import { clearSingleProduct, getSingleProduct } from "../../reducers/singleProduct";
 import Rating from "@mui/material/Rating";
 import { addToCart } from "../../reducers/cart";
 import Recommend from "../Recommend";
@@ -14,6 +14,9 @@ const SingleProduct = () => {
 
   useEffect(() => {
     dispatch(getSingleProduct(id));
+    return () => {
+      dispatch(clearSingleProduct())
+    }
   }, [id]);
 
   const product = useSelector((state) => state.singleProduct);

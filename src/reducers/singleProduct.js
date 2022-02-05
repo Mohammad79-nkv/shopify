@@ -7,10 +7,18 @@ export const getSingleProduct = (id) => {
   };
 };
 
+export const clearSingleProduct = () => {
+  return async (dispatch) => {
+    await dispatch({ type: "CLEAR_SINGLE_PRODUCT" });
+  };
+};
+
 const singleProductReducer = (state = {}, action) => {
   switch (action.type) {
     case "GET_SINGLE_PRODUCT":
       return { ...action.payload };
+    case "CLEAR_SINGLE_PRODUCT":
+      return {}
     default:
       return state;
   }

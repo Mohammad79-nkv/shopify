@@ -28,7 +28,7 @@ const AllProducts = () => {
   const ref = useRef();
  
   useEffect(() => {
-    dispatch(getProducts());
+    // dispatch(getProducts());
     dispatch(getCategories());
   }, []);
 
