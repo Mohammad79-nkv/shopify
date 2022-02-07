@@ -12,9 +12,11 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { BrowserRouter } from "react-router-dom";
-import { getProducts } from './reducers/product';
+import { getCategories, getProducts } from './reducers/product';
 
   store.dispatch(getProducts())
+  store.dispatch(getCategories());
+
 
 
 ReactDOM.render(

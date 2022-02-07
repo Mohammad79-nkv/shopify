@@ -11,8 +11,8 @@ import { useLocation } from "react-router-dom";
 import SingleProduct from "./../components/common/SingleProduct";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SignIn from "../components/register/SignIn";
-import SignUp from "../components/register/SignUp";
+import SignIn from "../components/authentication/SignIn";
+import SignUp from "../components/authentication/SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../reducers/user";
 import { initCart } from "../reducers/cart";
@@ -20,24 +20,25 @@ import NotFound from './../components/NotFound';
 
 function App() {
   const { pathname } = useLocation();
-  const cart = useSelector(state => state.cart)
+
   const dispatch = useDispatch();
+
+  // scroll to top when page changed
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
   useEffect(() => {
+
+    // get information from localStorage
     const user = JSON.parse(localStorage.getItem("user"))
-    const cartItem = JSON.parse(localStorage.getItem("cart"))
+    const cartItem = JSON.parse(localStorage.getItem("cart"))  
     dispatch(setUser(user))
     if(cartItem){
       dispatch(initCart(cartItem))
     }
 
   }, [])
-  // useEffect(()=>{
-  //   // if(localStorage.cart)
-  //   localStorage.setItem("cart", JSON.stringify(cart))
-  // },[cart])
   return (
     <Container className="App">
     <Header />
@@ -56,10 +57,5 @@ function App() {
     </Container>
   );
 }
-const Container = styled.div`
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: #ffffff; */
-`;
+const Container = styled.div``;
 export default App;

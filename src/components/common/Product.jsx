@@ -34,7 +34,7 @@ const Product = (props) => {
     dispatch(addToCart(id));
   };
   return (
-    <Card>
+    <Card className="py-2 d-flex flex-column justify-content-between rounded-3 m-3">
       <Link to={`/products/p/${id}`}>
         <CardImg>
           <img src={image} />
@@ -88,16 +88,14 @@ const Product = (props) => {
 
 const Card = styled.div`
   width: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  
   /* background: rgba(235, 146, 123, 0.5); */
   border: 1px solid rgba(235, 146, 123, 0.9);
   color: #1d0d0c;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   /* border: 1px solid rgba(255, 255, 255, 0.18); */
   transition: all 0.2s ease-in-out !important;
-  margin: 1rem;
+  /* margin: 1rem; */
   &:hover {
     box-shadow: 0px 0px 12px -1px rgba(235, 146, 123, 0.7);
     /* background-color: rgba(235, 146, 123, 0.2); */

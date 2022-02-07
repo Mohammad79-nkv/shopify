@@ -60,15 +60,15 @@ const Cart = () => {
         </ProductCart>
         <CartInfo className="col-12 col-md-4">
           {user.fullname ? (
-            <UserInfo>
+            <UserInfo className="d-flex align-item-center flex-md-column">
               <h4>User information :</h4>
-              <div className="mb-2">
+              <div className="mb-2 pe-2 d-flex align-item-center justify-content-center">
                 <h6>Name</h6>
-                <p>{user.fullname}</p>
+                <p className="text-truncate">{user.fullname}</p>
               </div>
-              <div>
+              <div className="mb-2 d-flex align-item-center justify-content-center">
                 <h6>EMAIL</h6>
-                <p>{user.email}</p>
+                <p className="text-truncate">{user.email}</p>
               </div>
             </UserInfo>
           ) : (

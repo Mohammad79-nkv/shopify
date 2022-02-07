@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
-import { setUser } from "./../../reducers/user";
+import { setUser } from "../../reducers/user";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 
 //per loader css
@@ -45,6 +45,8 @@ const SignIn = () => {
   const user = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
 
+  const ref = useRef();
+
   //submit function
   const onSubmit = async (values) => {
     const { email, password } = values;
@@ -52,12 +54,9 @@ const SignIn = () => {
       email,
       password,
     };
-    console.log("object");
     setLoading(true);
     try {
       const { status, data } = await loginUser(user);
-      // const user = deCodedToken(data.token)
-      console.log(status);
       const userLogedIn = jwt(data.token).user;
       const firstName = userLogedIn.fullname.split(" ")[0];
       dispatch(setUser(userLogedIn));
@@ -121,6 +120,7 @@ const SignIn = () => {
               validateOnChange={true}
               validateOnMount
               validateOnBlur
+
             >
               {(formik) => (
                 <Form>

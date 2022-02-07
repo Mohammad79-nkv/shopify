@@ -69,7 +69,7 @@ const AllProducts = () => {
       <ManageProducts className="d-flex p-5 justify-content-around justify-content-lg-center mx-lg-5 ">
         <div className="dropdown  me-lg-5">
           <button
-            class="btn btn-outline-dark dropdown-toggle me-lg-5"
+            class="btn btn-outline-secondary-2 dropdown-toggle me-lg-5"
             type="button"
             id="dropdownMenuButton1"
             data-bs-toggle="dropdown"
@@ -123,7 +123,7 @@ const AllProducts = () => {
                   key={index}
                     onClick={(e) => handleActive(e)}
                     type="button"
-                    className="btn btn-outline-success mx-1"
+                    className="btn btn-outline-secondary-2 mx-1"
                     data-filter={categorie === "all" ? "" : categorie}
                   >
                     {categorie.toUpperCase()}
@@ -137,7 +137,7 @@ const AllProducts = () => {
         {categories && (
           <div className="dropdown d-lg-none">
             <button
-            className="btn btn-outline-dark dropdown-toggle"
+            className="btn btn-outline-secondary-2 dropdown-toggle"
               type="button"
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"

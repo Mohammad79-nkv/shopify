@@ -2,11 +2,15 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import styled from "styled-components";
-import { clearSingleProduct, getSingleProduct } from "../../reducers/singleProduct";
+import {
+  clearSingleProduct,
+  getSingleProduct,
+} from "../../reducers/singleProduct";
 import Rating from "@mui/material/Rating";
 import { addToCart } from "../../reducers/cart";
 import Recommend from "../Recommend";
 import { toast } from "react-toastify";
+import Spinner from "../preLoader/Spinner";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -15,8 +19,8 @@ const SingleProduct = () => {
   useEffect(() => {
     dispatch(getSingleProduct(id));
     return () => {
-      dispatch(clearSingleProduct())
-    }
+      dispatch(clearSingleProduct());
+    };
   }, [id]);
 
   const product = useSelector((state) => state.singleProduct);
@@ -28,22 +32,25 @@ const SingleProduct = () => {
 
   const handleAddToCart = (id) => {
     console.log("object");
-    toast.success(<p><span style={{fontWeight: "bold"}}>{product.title}</span> added to cart</p>, {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      });
+    toast.success(
+      <p>
+        <span style={{ fontWeight: "bold" }}>{product.title}</span> added to
+        cart
+      </p>,
+      {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
     dispatch(addToCart(id));
   };
 
   let isExistInCart = cart.find((p) => p.id === productId);
-
-  // console.log(rating)
-  // product.rating.rate
 
   return (
     product && (
@@ -51,11 +58,15 @@ const SingleProduct = () => {
         <Content className="row container-fluid p-0 m-0">
           <ProductImage className="d-flex flex-column col-12 col-lg-8 col-xl-3 mb-2 pt-4">
             <div className="w-100 mx-auto">
-              <img
-                className="mx-auto w-100"
-                src={product.image}
-                alt={product.category}
-              />
+              {product.image ? (
+                <img
+                  className="mx-auto w-100"
+                  src={product.image}
+                  alt={product.category}
+                />
+              ) : (
+                <Spinner color = "#EB927B" size = "300"/>
+              )}
             </div>
             <div className="d-flex justify-content-between me-5 ps-2 py-3">
               <i className="bi bi-heart"></i>
@@ -112,13 +123,17 @@ const SingleProduct = () => {
                   onClick={() => handleAddToCart(product.id)}
                   className="btn px-5"
                 >
-                  {isExistInCart ? (
-                    <Fragment>
-                      <i className="bi bi-check-lg"></i>
-                      <span>In cart</span>
-                    </Fragment>
+                  {product.image ? (
+                    isExistInCart ? (
+                      <Fragment>
+                        <i className="bi bi-check-lg"></i>
+                        <span>In cart</span>
+                      </Fragment>
+                    ) : (
+                      <span>Add to Cart</span>
+                    )
                   ) : (
-                    <span>Add to Cart</span>
+                    <Spinner color = "#EB927B" size = "45"/>
                   )}
                 </button>
               </AddCart>

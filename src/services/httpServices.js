@@ -13,7 +13,7 @@ axios.interceptors.response.use(null, error => {
         error.response.status < 500;
     if (!expectedErrors) {
         console.log(error);
-        toast.error("مشکلی از سمت سرور رخ داده است.", {
+        toast.error("Somthing went wrong from Server", {
             position: "top-right",
             closeOnClick: true
         });
