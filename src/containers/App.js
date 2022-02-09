@@ -9,14 +9,16 @@ import AllProducts from "../components/AllProducts";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import SingleProduct from "./../components/common/SingleProduct";
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import SignIn from "../components/authentication/SignIn";
 import SignUp from "../components/authentication/SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../reducers/user";
 import { initCart } from "../reducers/cart";
-import NotFound from './../components/NotFound';
+import NotFound from "./../components/NotFound";
+import { routes } from "../routes/Routes";
+import MainLayout from "../layouts/MainLayout";
 
 function App() {
   const { pathname } = useLocation();
@@ -29,33 +31,23 @@ function App() {
   }, [pathname]);
 
   useEffect(() => {
-
     // get information from localStorage
-    const user = JSON.parse(localStorage.getItem("user"))
-    const cartItem = JSON.parse(localStorage.getItem("cart"))  
-    dispatch(setUser(user))
-    if(cartItem){
-      dispatch(initCart(cartItem))
+    const user = JSON.parse(localStorage.getItem("user"));
+    const cartItem = JSON.parse(localStorage.getItem("cart"));
+    dispatch(setUser(user));
+    if (cartItem) {
+      dispatch(initCart(cartItem));
     }
-
-  }, [])
+  }, []);
   return (
-    <Container className="App">
-    <Header />
-    <ToastContainer/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart/" element={<Cart />} />
-        <Route path="/products/" element={<AllProducts />} />
-        <Route path="/products/p/:id/" element={<SingleProduct />} />
-        <Route path="/signIn/" element={<SignIn />} />
-        <Route path="/signUp/" element={<SignUp />} />
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-
-      <Footer />
-    </Container>
+      <MainLayout>
+        <Routes>
+          {routes.map((route, index) => (
+            <Route key={index} {...route} />
+          ))}
+        </Routes>
+      </MainLayout>
   );
 }
-const Container = styled.div``;
+// const Container = styled.div``;
 export default App;

@@ -31,7 +31,6 @@ const SingleProduct = () => {
   const satisfactionPercentage = (rate.rate / 5) * 100;
 
   const handleAddToCart = (id) => {
-    console.log("object");
     toast.success(
       <p>
         <span style={{ fontWeight: "bold" }}>{product.title}</span> added to
@@ -195,8 +194,6 @@ const ProductAction = styled.div`
   border-radius: 10px;
   border: 2px solid rgba(62, 81, 150, 0.3);
   @media (min-width: 992px) and (max-width: 1200px) {
-    /* display: none; */
-    /* position: sticky!important; */
     margin-top: -300px;
   }
   & > div {

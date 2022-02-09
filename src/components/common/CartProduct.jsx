@@ -19,7 +19,6 @@ const CartProduct = (props) => {
 
   const handleCount = (e) => {
     const countAction = e.currentTarget.dataset.count;
-    console.log(countAction);
     if (countAction === "increment") {
       setIncrement(!increment);
     } else if (countAction === "decrement" && cartItemCount > 1) {
